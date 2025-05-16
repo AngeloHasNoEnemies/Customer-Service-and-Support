@@ -1,4 +1,136 @@
-home {
-    background-color: aliceblue;
-    font: arial;
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f7f9fc;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.navbar {
+  background-color: #1e3a8a;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.navbar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.navbar-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.navbar-right {
+ display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.navbar-right a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.main-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 2rem 0 1rem;
+}
+
+.metrics {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.metric-box {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  text-align: center;
+  width: 180px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.tickets-table {
+  display: flex;
+  justify-content: center;
+}
+
+.tickets-table table {
+  width: 100%;
+  max-width: 900px;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.tickets-table th,
+.tickets-table td {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.feedback-summary {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.feedback-card {
+  background-color: #ffffff;
+  padding: 1rem 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 220px;
+  text-align: center;
+  box-shadow: 0 0 4px rgba(0,0,0,0.08);
+}
+
+.kb-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.kb-links a {
+  text-decoration: none;
+  background-color: #1e40af;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.kb-links a:hover {
+  background-color: #1d4ed8;
 }
