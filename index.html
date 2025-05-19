@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Customer Service and Support</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="navbar">
+    <div class="navbar-inner">
+      <div class="navbar-title">Customer Service and Support</div>
+      <div class="navbar-links">
+        <a href="#">Dashboard</a>
+        <a href="#">Tickets</a>
+        <a href="#">Returns & Warranties</a>
+        <a href="#">Feedback</a>
+        <a href="#">Analytics</a>
+        <a href="#">⚙</a>
+      </div>
+    </div>
+    <div class="navbar-right">
+      <a href="#">👤 User Profile </a>
+      <a href="#">🔔 Notifications</a>
+    </div>
+  </div>
+
+  <div class="ticket-container">
+    <h1>Place Your Ticket</h1>
+    <p>Fill out the form below to send your request.</p>
+    
+    <form action="submit_order.php" method="POST">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="quantity">Issue</label>
+        <input type="number" id="quantity" name="quantity" min="1" required>
+
+        <label for="order-details">Description</label>
+        <textarea id="order-details" name="order_details" rows="5" required></textarea>
+
+        <button type="submit">Submit ticket</button>
+    </form>
+    
+    <a href="index.html" class="back-btn">Back to Home</a>
+</div>    
+</body>
+</html>
+
+</body>
+</html>

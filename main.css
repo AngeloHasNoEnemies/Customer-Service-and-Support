@@ -134,3 +134,77 @@ body {
 .kb-links a:hover {
   background-color: #1d4ed8;
 }
+
+/* Ticket form */
+
+.ticket-container {
+    max-width: 650px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #1e3a8a;
+    color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.ticket-container h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.ticket-container p {
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+  text-align: left;
+}
+
+input, textarea {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #444;
+  background: #333;
+  color: #fff;
+  border-radius: 5px;
+}
+
+textarea {
+  resize: none;
+}
+
+button {
+  background: #100197;
+  color: #d0d0d0;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+
+button:hover {
+  transform: scale(1.1);
+  background: #08024e;
+}
+
+.back-btn {
+  display: block;
+  margin-top: 15px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
