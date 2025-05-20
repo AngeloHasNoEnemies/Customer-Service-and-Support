@@ -42,6 +42,15 @@ body {
   transition: color 0.2s ease;
 }
 
+.navbar-links {
+  display: flex;
+  justify-content: center;
+  flex: 2;
+  gap: 1.5rem;
+  margin-left: 23rem;
+}
+
+
 .navbar-links a:hover,
 .navbar-right a:hover {
   color: #1abc9c;
