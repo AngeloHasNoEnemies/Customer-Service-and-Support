@@ -1,15 +1,18 @@
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #f0f2f5;
-    margin: 0;
-    padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f7f9fc;
+  margin: 0;
+  padding: 0;
+  color: #333;
   }
   
   .ca-dashboard {
     max-width: 1200px;
     margin: auto;
-    background: white;
+    background: #08024e;
     border-radius: 10px;
+    margin-top: 2%;
+    margin-bottom: 4%;
     padding: 30px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   }
@@ -17,7 +20,7 @@ body {
   .ca-title {
     text-align: center;
     margin-bottom: 30px;
-    color: #333;
+    color: #ffffff;
   }
   
   .ca-kpi-section {
@@ -28,20 +31,20 @@ body {
   }
   
   .ca-kpi-card {
-    background: #eef1f5;
+    background: #3B82F6;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
   }
   
   .ca-kpi-title {
-    color: #555;
+    color: #ffffff;
     margin-bottom: 10px;
   }
   
   .ca-kpi-value {
     font-size: 1.8rem;
-    color: #111;
+    color: #434242;
   }
   
   .ca-charts-section {
@@ -54,15 +57,15 @@ body {
   .ca-chart-box {
     flex: 1;
     min-width: 300px;
-    background: #fafafa;
-    border: 1px dashed #ccc;
+    background: #3B82F6;
+    border: 1px dashed #08024e;
     border-radius: 8px;
     padding: 20px;
   }
   
   .ca-chart-title {
     margin-bottom: 10px;
-    color: #444;
+    color: #ffffff;
   }
   
   .ca-chart-placeholder {
@@ -82,13 +85,14 @@ body {
   
   .ca-table-title {
     margin-bottom: 10px;
-    color: #333;
+    color: #ffffff;
+    margin-bottom: 2%;
   }
   
   .ca-table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
+    background: #3B82F6;
     border-radius: 8px;
     overflow: hidden;
   }
@@ -96,11 +100,98 @@ body {
   .ca-table th, .ca-table td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #2d65be;
+    color: #f7f9fc;
   }
   
   .ca-table th {
-    background: #f5f5f5;
-    color: #555;
+    background: #2d65be;
+    color: #ffffff;
   }
   
+  .navbar {
+    background-color: #08024e;
+    padding: 2.5rem 2rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .navbar-inner {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: 2rem;
+  }
+  
+  .navbar-links a,
+  .navbar-right a {
+    margin: 0 0.75rem;
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .navbar-links a:hover,
+  .navbar-right a:hover {
+    color: #1abc9c;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+
+
+  .footer {
+    background: #08024e;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .footer-info,
+  .footer-socials {
+    max-width: 400px;
+  }
+  
+  .footer h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #d0d0d0; 
+  }
+  
+  .footer p {
+    font-size: 1rem;
+    margin: 5px 0;
+    color: #d0d0d0;
+  }
+  
+  .footer a {
+    color: #ffcc00;
+    text-decoration: none;
+  }
+  
+  .footer a:hover {
+    color: #0602ff;
+  }

@@ -54,9 +54,14 @@ body {
 
 
 .main-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+  background: #08024e;
+  border-radius: 10px;
+  margin-top: 2%;
+  margin-bottom: 4%;
+  padding: 30px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .section-title {
@@ -64,6 +69,7 @@ body {
   font-size: 1.3rem;
   font-weight: bold;
   margin: 2rem 0 1rem;
+  color: #ffffff;
 }
 
 .metrics {
@@ -74,14 +80,14 @@ body {
 }
 
 .metric-box {
-  background-color: #08024e;
-  border: 1px solid #ddd;
+  background-color: #3B82F6;
+  border: 1px solid #2d65be;
   padding: 1rem;
   text-align: center;
   width: 180px;
   border-radius: 8px;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  color: #ddd;
+  color: #ffffff;
 }
 
 .tickets-table {
@@ -93,7 +99,8 @@ body {
   width: 100%;
   max-width: 900px;
   border-collapse: collapse;
-  background: #08024e;
+  border: #2d65be;
+  background: #3B82F6;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
@@ -102,7 +109,7 @@ body {
   padding: 10px 15px;
   border: 2px solid #000000;
   text-align: center;
-  color: #d0d0d0;
+  color: #ffffff;
 }
 
 .feedback-summary {
