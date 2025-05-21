@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Customer Service and Support</title>
   <link rel="stylesheet" href="style/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
 
@@ -79,6 +80,43 @@
   </div>
   <p class="footer-credit">© 2025 maghanoylookingforbb. All Rights Reserved.</p>
 </footer>
+
+<script>
+  const supabaseUrl = 'https://yzygiaffkaoytroaeodc.supabase.co'; 
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl6eWdpYWZma2FveXRyb2Flb2RjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1Mzg2NTksImV4cCI6MjA2MjExNDY1OX0.no9SbRY08jXaIgbjpnEvTzN4-JBX6WBEBzFtUpGhkgw'; 
+  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+  const form = document.querySelector('form');
+  
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); 
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const issue = document.getElementById('issue').value;
+    const order_details = document.getElementById('order-details').value;
+
+    const { data, error } = await supabase.from('tickets').insert([
+      {
+        name,
+        email,
+        phone,
+        issue,
+        order_details,
+        created_at: new Date().toISOString()
+      }
+    ]);
+
+    if (error) {
+      alert('Something went wrong: ' + error.message);
+    } else {
+      alert('Ticket submitted successfully! 🎟️');
+      form.reset(); 
+    }
+  });
+</script>
+
 
 </body>
 </html>
