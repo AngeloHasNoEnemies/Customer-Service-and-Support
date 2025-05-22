@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer</title>
     <link rel="stylesheet" href="style/customer.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="script.js"></script>
 </head>
 <body>
      <nav class="navbar">
@@ -18,7 +20,7 @@
     <h1>Place Your Ticket</h1>
     <p>Fill out the form below to send your request.</p>
     
-    <form action="submit_order.php" method="POST">
+    <form action="submit_ticket">
         <label for="name">Full Name</label>
         <input type="text" id="name" name="name" required>
 
