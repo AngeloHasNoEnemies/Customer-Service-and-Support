@@ -1,0 +1,151 @@
+.navbar {
+  background-color: #08024e;
+  padding: 2.5rem 2rem;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.navbar-inner {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  margin-left: 750px;
+}
+
+
+
+.ticket-container {
+    max-width: 650px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #1e3a8a;
+    color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.ticket-container h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.ticket-container p {
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+  text-align: left;
+}
+
+input, textarea {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #444;
+  background: #333;
+  color: #fff;
+  border-radius: 5px;
+}
+
+select {
+  width: 98%;
+  padding: 10px;
+  border: 1px solid #444;
+  background: #333;
+  color: #fff;  
+  border-radius: 5px;
+}
+
+textarea {
+  resize: none;
+}
+
+button {
+  background: #100197;
+  color: #d0d0d0;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: #08024e;
+}
+
+.back-btn {
+  display: block;
+  margin-top: 15px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+/* Ticket Form end */
+
+/* Footer */
+
+.footer {
+  background: #08024e;
+  color: #fff;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-info,
+.footer-socials {
+  max-width: 400px;
+}
+
+.footer h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #d0d0d0; 
+}
+
+.footer p {
+  font-size: 1rem;
+  margin: 5px 0;
+  color: #d0d0d0;
+}
+
+.footer a {
+  color: #ffcc00;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #0602ff;
+}

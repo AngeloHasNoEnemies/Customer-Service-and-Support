@@ -47,7 +47,7 @@ body {
   justify-content: center;
   flex: 2;
   gap: 1.5rem;
-  margin-left: 23rem;
+  margin-left: 17rem;
 }
 
 
@@ -161,129 +161,119 @@ body {
   background-color: #1d4ed8;
 }
 
-/* Ticket form */
+ /* for index */
 
-.ticket-container {
-    max-width: 650px;
-    margin: 50px auto;
-    padding: 20px;
-    background: #1e3a8a;
-    color: #fff;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-.ticket-container h1 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    color: #ffffff;
-}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f0f4ff, #e0e7ff);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-.ticket-container p {
-    margin-bottom: 20px;
-    color: #ccc;
-}
+    /* Header */
+    .navbar {
+      background-color: #08024e;
+      padding: 2rem 1rem;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
+    .navbar-title {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+    }
 
-label {
-  font-weight: bold;
-  text-align: left;
-}
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
 
-input, textarea {
-  width: 95%;
-  padding: 10px;
-  border: 1px solid #444;
-  background: #333;
-  color: #fff;
-  border-radius: 5px;
-}
+    .card {
+      background-color: white;
+      padding: 100px 100px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+      text-align: center;
+    }
 
-select {
-  width: 98%;
-  padding: 10px;
-  border: 1px solid #444;
-  background: #333;
-  color: #fff;  
-  border-radius: 5px;
-}
+    .btn {
+      display: inline-block;
+      background-color: #08024e;
+      color: white;
+      padding: 20px 80px;
+      margin: 15px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
 
-textarea {
-  resize: none;
-}
+    .btn:hover {
+      background-color: #302bb3;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
 
-button {
-  background: #100197;
-  color: #d0d0d0;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 1.2rem;
-}
+    .or-text {
+      margin: 10px 0;
+      font-size: 1rem;
+      color: #666;
+    }
 
-button:hover {
-  transform: scale(1.05);
-  background: #08024e;
-}
+    /* Footer */
+    .footer {
+      background: #08024e;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
 
-.back-btn {
-  display: block;
-  margin-top: 15px;
-  color: #ffffff;
-  text-decoration: none;
-}
+    .footer-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
 
-.back-btn:hover {
-  text-decoration: underline;
-}
+    .footer h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #ffcc00;
+    }
 
-/* Ticket Form end */
+    .footer p,
+    .footer a {
+      font-size: 1rem;
+      color: #d0d0d0;
+      text-decoration: none;
+    }
 
-/* Footer */
+    .footer a:hover {
+      color: #ffcc00;
+    }
 
-.footer {
-  background: #08024e;
-  color: #fff;
-  padding: 40px 0;
-  text-align: center;
-}
-
-.footer-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.footer-info,
-.footer-socials {
-  max-width: 400px;
-}
-
-.footer h2 {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-  color: #d0d0d0; 
-}
-
-.footer p {
-  font-size: 1rem;
-  margin: 5px 0;
-  color: #d0d0d0;
-}
-
-.footer a {
-  color: #ffcc00;
-  text-decoration: none;
-}
-
-.footer a:hover {
-  color: #0602ff;
-}
+    .footer-credit {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
