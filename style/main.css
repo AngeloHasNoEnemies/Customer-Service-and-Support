@@ -7,59 +7,58 @@ body {
 }
 
 .navbar {
-  background-color: #08024e;
-  padding: 2.5rem 2rem;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: Arial, sans-serif;
-}
-
-.navbar-inner {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navbar-left {
-  display: flex;
-  align-items: center;
-}
-
-.navbar-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-right: 2rem;
-}
-
-.navbar-links a,
-.navbar-right a {
-  margin: 0 0.75rem;
-  color: white;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.navbar-links {
+    background-color: #08024e;
+    padding: 2.5rem 2rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .navbar-inner {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: 2rem;
+  }
+  
+  .navbar-links a,
+  .navbar-right a {
+    margin: 0 0.75rem;
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .navbar-links {
   display: flex;
   justify-content: center;
   flex: 2;
   gap: 1.5rem;
-  margin-left: 17rem;
+  margin-left: 16rem;
 }
 
-
-.navbar-links a:hover,
-.navbar-right a:hover {
-  color: #1abc9c;
-}
-
-.navbar-right {
-  display: flex;
-  align-items: center;
-}
+  .navbar-links a:hover,
+  .navbar-right a:hover {
+    color: #1abc9c;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
 
 
 .main-container {
@@ -162,7 +161,7 @@ body {
 }
 
  /* for index */
-
+/* Reset and Base Styles */
     * {
       margin: 0;
       padding: 0;
@@ -207,9 +206,9 @@ body {
 
     .card {
       background-color: white;
-      padding: 100px 100px;
+      padding: 40px 60px;
       border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
 
