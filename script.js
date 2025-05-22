@@ -1,28 +1,37 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const supabaseUrl = 'https://yzygiaffkaoytroaeodc.supabase.co';
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl6eWdpYWZma2FveXRyb2Flb2RjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1Mzg2NTksImV4cCI6MjA2MjExNDY1OX0.no9SbRY08jXaIgbjpnEvTzN4-JBX6WBEBzFtUpGhkgw';
-  const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-  const form = document.getElementById('ticket-form');
+const SUPABASE_URL = 'https://yzygiaffkaoytroaeodc.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl6eWdpYWZma2FveXRyb2Flb2RjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1Mzg2NTksImV4cCI6MjA2MjExNDY1OX0.no9SbRY08jXaIgbjpnEvTzN4-JBX6WBEBzFtUpGhkgw';
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector('form');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const issue = document.getElementById('issue').value;
-    const order_details = document.getElementById('order-details').value;
+    const name = document.querySelector('#name').value;
+    const email = document.querySelector('#email').value;
+    const phone = document.querySelector('#phone').value;
+    const issue = document.querySelector('#issue').value;
+    const orderDetails = document.querySelector('#order-details').value;
 
     const { data, error } = await supabase
-      .from('main')
-      .insert([{ name, email, phone, issue, order_details }]);
+      .from('tickets')
+      .insert([
+        {
+          name,
+          email,
+          phone,
+          issue,
+          order_details: orderDetails
+        }
+      ]);
 
     if (error) {
-      console.error('Insert failed:', error.message);
-      alert('Error submitting ticket. Check console.');
+      alert('Error: ' + error.message);
+      console.error(error);
     } else {
-      alert('Ticket submitted successfully!');
+      alert('Ticket sent successfully! 🎫💫');
       form.reset();
     }
   });
