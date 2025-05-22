@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Customer Service and Support</title>
-  <link rel="stylesheet" href="style/dashboard.css">
+  <link rel="stylesheet" href="style/dashboard.css" />
 </head>
 <body>
 
@@ -19,8 +19,8 @@
         </div>
       </div>
       <div class="navbar-right">
-        <a href="#" aria-label="User Profile">👤 Profile </a>
-        <a href="#" aria-label="Notifications">🔔 Notifications </a>
+        <a href="#" aria-label="User Profile">👤 Profile</a>
+        <a href="#" aria-label="Notifications">🔔 Notifications</a>
       </div>
     </div>
   </nav>
@@ -28,10 +28,10 @@
   <div class="main-container">
 
     <section class="metrics">
-      <div class="metric-box">Total Tickets<br><span>[Number]</span></div>
-      <div class="metric-box">Pending Returns<br><span>[Number]</span></div>
-      <div class="metric-box">SLA Alerts<br><span>[Number]</span></div>
-      <div class="metric-box">CSAT Score<br><span>[Percentage]</span></div>
+      <div class="metric-box">Total Tickets<br><span>Loading...</span></div>
+      <div class="metric-box">Pending Returns<br><span>Loading...</span></div>
+      <div class="metric-box">SLA Alerts<br><span>Loading...</span></div>
+      <div class="metric-box">CSAT Score<br><span>Loading...</span></div>
     </section>
 
     <section class="section-title">Recent Support Tickets</section>
@@ -49,10 +49,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>12345</td><td>JL Angeles</td><td>Technical</td><td>High</td><td>Open</td><td>Agent A</td><td><a href="#" class="view-link">View</a></td>
-          <tr><td>12346</td><td>Levi Baron</td><td>Return</td><td>Medium</td><td>Pending</td><td>Agent B</td><td><a href="#" class="view-link">View</a></td>
-          <tr><td>12347</td><td>Angelo Burlat</td><td>Inquiry</td><td>Low</td><td>Closed</td><td>Agent C</td><td><a href="#" class="view-link">View</a></td>
-          <tr><td>12347</td><td>Renhiel Maghanoy</td><td>Inquiry</td><td>Low</td><td>Closed</td><td>Agent C</td><td><a href="#" class="view-link">View</a></td>
+          <!-- Dynamic content will be inserted here by dashboard.js -->
+          <tr><td colspan="7" style="text-align:center;">Loading tickets...</td></tr>
         </tbody>
       </table>
     </section>
@@ -60,7 +58,7 @@
     <section class="section-title">Feedback Summary</section>
     <section class="feedback-summary">
       <div class="feedback-card">
-        <strong>CSAT:</strong> 92%<br>[Graph Placeholder]
+        <strong>CSAT:</strong> 89%<br>[Graph Placeholder]
       </div>
       <div class="feedback-card">
         <strong>NPS:</strong> 78<br>[Graph Placeholder]
@@ -80,21 +78,22 @@
 
   </div>
 
-  <br>
-  <br>
-  <br>
-
   <footer class="footer">
     <div class="footer-container">
-        <div class="footer-info">
-            <h2>Contact Us</h2>
-            <p>Email: <a href="maghanoylookingforbb@gmail.com">maghanoylookingforbb@gmail.com</a></p>
-            <p>Phone: <a href="tel:+123456789">09999999999</a></p>
-            <p>Location: Cagayan de Oro City</p>
-        </div>
+      <div class="footer-info">
+        <h2>Contact Us</h2>
+        <p>Email: <a href="mailto:maghanoylookingforbb@gmail.com">maghanoylookingforbb@gmail.com</a></p>
+        <p>Phone: <a href="tel:+123456789">09999999999</a></p>
+        <p>Location: Cagayan de Oro City</p>
+      </div>
     </div>
     <p class="footer-credit">© 2025 maghanoylookingforbb. All Rights Reserved.</p>
   </footer>
-  
+
+  <!-- Supabase JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Your dashboard script -->
+  <script src="scripts/dashboard.js"></script>
+
 </body>
 </html>
