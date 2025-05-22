@@ -1,72 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer</title>
-    <link rel="stylesheet" href="style/customer.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Customer</title>
+  <link rel="stylesheet" href="style/customer.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-     <nav class="navbar">
+  <nav class="navbar">
     <div class="navbar-inner">
       <div class="navbar-left">
         <div class="navbar-title">Customer Service and Support</div>
+      </div>
     </div>
   </nav>
 
   <div class="ticket-container">
     <h1>Place Your Ticket</h1>
     <p>Fill out the form below to send your request.</p>
-    
-    <form action="submit_ticket">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" required>
 
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required>
+    <form id="ticket-form">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required />
 
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" required>
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required />
 
-        <label for="issue">Issue</label>
-        <select id="issue" name="issue" required>
-          <option value="" disabled selected>Select an issue</option>
-          <option value="missing_item">Missing Item</option>
-          <option value="damaged_item">Damaged Item</option>
-          <option value="late_delivery">Late Delivery</option>
-          <option value="warranty_claim">Warranty Claim</option>
-          <option value="return_request">Return Request</option>
-          <option value="technical_support">Technical Support</option>
-          <option value="other">Other</option>
-        </select>
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" required />
 
-        <label for="order-details">Description</label>
-        <textarea id="order-details" name="order_details" rows="5" required></textarea>
+      <label for="issue">Issue</label>
+      <select id="issue" name="issue" required>
+        <option value="" disabled selected>Select an issue</option>
+        <option value="missing_item">Missing Item</option>
+        <option value="damaged_item">Damaged Item</option>
+        <option value="late_delivery">Late Delivery</option>
+        <option value="warranty_claim">Warranty Claim</option>
+        <option value="return_request">Return Request</option>
+        <option value="technical_support">Technical Support</option>
+        <option value="other">Other</option>
+      </select>
 
-        <button type="submit">Submit ticket</button>
+      <label for="order_details">Description</label>
+      <textarea id="order_details" name="order_details" rows="5" required></textarea>
+
+      <button type="submit">Submit ticket</button>
     </form>
-    
+
     <a href="index.html" class="back-btn">Back to Home</a>
-</div>   
-
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<footer class="footer">
-  <div class="footer-container">
-      <div class="footer-info">
-          <h2>Contact Us</h2>
-          <p>Email: <a href="maghanoylookingforbb@gmail.com">maghanoylookingforbb@gmail.com</a></p>
-          <p>Phone: <a href="tel:+123456789">09999999999</a></p>
-          <p>Location: Cagayan de Oro City</p>
-      </div>
   </div>
-  <p class="footer-credit">© 2025 maghanoylookingforbb. All Rights Reserved.</p>
-</footer>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-info">
+        <h2>Contact Us</h2>
+        <p>Email: <a href="mailto:maghanoylookingforbb@gmail.com">maghanoylookingforbb@gmail.com</a></p>
+        <p>Phone: <a href="tel:+123456789">09999999999</a></p>
+        <p>Location: Cagayan de Oro City</p>
+      </div>
+    </div>
+    <p class="footer-credit">© 2025 maghanoylookingforbb. All Rights Reserved.</p>
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="customer.js"></script>
+
 </body>
 </html>
