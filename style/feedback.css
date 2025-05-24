@@ -1,10 +1,11 @@
+/* Reset & Base Styles */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #f7f9fc;
   margin: 0;
-  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f8;
   color: #333;
 }
+
 .navbar {
     background-color: #08024e;
     padding: 2.5rem 2rem;
@@ -60,89 +61,102 @@ body {
   }
 
 
-
-.ticket-container {
-    max-width: 650px;
-    margin: 50px auto;
-    padding: 20px;
-    background: #1e3a8a;
-    color: #fff;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #1e3a8a;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  color: #f9f9f9;
 }
 
-.ticket-container h1 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    color: #ffffff;
+h1, h2 {
+  text-align: center;
+  color: #ffffff;
 }
 
-.ticket-container p {
-    margin-bottom: 20px;
-    color: #ccc;
+/* Feedback Form */
+.feedback-form {
+  margin-bottom: 40px;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
 }
 
 label {
-  font-weight: bold;
-  text-align: left;
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
-input, textarea {
-  width: 95%;
-  padding: 10px;
-  border: 1px solid #444;
-  background: #333;
-  color: #fff;
-  border-radius: 5px;
-}
-
-select {
-  width: 98%;
-  padding: 10px;
-  border: 1px solid #444;
-  background: #333;
-  color: #fff;  
-  border-radius: 5px;
+input[type="text"],
+textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #333;
+  color: white;
 }
 
 textarea {
-  resize: none;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.checkbox-group {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
 }
 
 button {
-  background: #007BFF;
-  color: #d0d0d0;
+  background-color: #007BFF;
+  color: white;
+  padding: 12px;
   border: none;
-  padding: 10px;
+  border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
-  border-radius: 5px;
-  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  transform: scale(1.05);
-  background: #08024e;
+  background-color: #08024e;
 }
 
-.back-btn {
+/* Feedback Display */
+.feedback-display {
+  margin-top: 20px;
+}
+
+.feedback-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.feedback-item {
+  background-color: #333;
+  border-left: 5px solid #08024e;
+  padding: 15px;
+  border-radius: 6px;
+}
+
+.feedback-item strong {
+  color: #007BFF;
   display: block;
-  margin-top: 15px;
-  color: #ffffff;
-  text-decoration: none;
+  margin-bottom: 5px;
 }
-
-.back-btn:hover {
-  text-decoration: underline;
-}
-
-/* Ticket Form end */
 
 /* Footer */
 
