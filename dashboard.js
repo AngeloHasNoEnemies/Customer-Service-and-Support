@@ -65,6 +65,7 @@ async function loadDashboard() {
       <td>${ticket.issue || 'N/A'}</td>
       <td>${mapPriority(ticket.priority || 2)}</td>
       <td>${mapStatus(ticket.status || 'Open')}</td>
+      <td>${ticket.created_at || 'N/A'}</td>
       <td>${ticket.assigned_to || 'Unassigned'}</td>
       <td><a href="view_tickets.html">View</a></td>
     `;
