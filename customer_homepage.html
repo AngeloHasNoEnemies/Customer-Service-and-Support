@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Customer Dashboard</title>
+  <link rel="stylesheet" href="style/customer_homepage.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="navbar-left">
+        <div class="navbar-title">Customer Service & Support</div>
+        <div class="navbar-links">
+          <a href="#">Dashboard</a>
+          <a href="customer.html">Submit Ticket</a>
+          <a href="feedback.html">Feedback</a>
+          <a href="ticket_status.html">Ticket Status</a>
+        </div>
+      </div>
+      <div class="navbar-right">
+        <a href="#">👤 Profile</a>
+        <a href="#">🔔 Notifications</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="dashboard">
+    <h1>Welcome, Levi Gwapo!</h1>
+    <p class="subheading">Here's a quick overview of your service activity.</p>
+
+    <!-- Overview Cards -->
+    <div class="overview-cards">
+      <div class="card open">
+        <h3>Open Tickets</h3>
+        <p>2</p>
+      </div>
+      <div class="card progress">
+        <h3>In Progress</h3>
+        <p>1</p>
+      </div>
+      <div class="card closed">
+        <h3>Resolved</h3>
+        <p>5</p>
+      </div>
+    </div>
+
+    <!-- Transaction History -->
+    <section class="history-section">
+      <h2>Transaction History</h2>
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Issue Type</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="history-body">
+          <!-- Data to be populated dynamically -->
+          <tr>
+            <td>May 20, 2025</td>
+            <td>Return Request</td>
+            <td><span class="status closed">Resolved</span></td>
+            <td><a href="view_ticket.html">View</a></td>
+          </tr>
+          <tr>
+            <td>May 18, 2025</td>
+            <td>Damaged Item</td>
+            <td><span class="status open">Open</span></td>
+            <td><a href="view_ticket.html">View</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Feedback or Complaint Section -->
+    <section class="feedback-section">
+      <h2>Your Submitted Feedback</h2>
+      <ul class="feedback-list">
+        <li>
+          <strong>Complaint:</strong> "Item arrived late." <br/>
+          <span>Status: Reviewed - Solution Offered</span>
+        </li>
+        <li>
+          <strong>Feedback:</strong> "Support was helpful and responsive!" <br/>
+          <span>Status: Acknowledged</span>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-info">
+        <h2>Contact Us</h2>
+        <p>Email: <a href="mailto:maghanoylookingforbb@gmail.com">maghanoylookingforbb@gmail.com</a></p>
+        <p>Phone: <a href="tel:+123456789">09999999999</a></p>
+        <p>Location: Cagayan de Oro City</p>
+      </div>
+    </div>
+    <p class="footer-credit">© 2025 maghanoylookingforbb. All Rights Reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="customer_dashboard.js"></script>
+</body>
+</html>
