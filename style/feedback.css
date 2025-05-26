@@ -158,6 +158,35 @@ button:hover {
   margin-bottom: 5px;
 }
 
+.rating-group {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.rating-stars {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+}
+
+.rating-stars input[type="radio"] {
+  display: none;
+}
+
+.rating-stars label {
+  font-size: 3rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.rating-stars input[type="radio"]:checked ~ label,
+.rating-stars label:hover,
+.rating-stars label:hover ~ label {
+  color: gold;
+}
+
 /* Footer */
 
 .footer {
