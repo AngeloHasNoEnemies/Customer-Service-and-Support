@@ -66,7 +66,7 @@ async function loadDashboard() {
       <td>${mapPriority(ticket.priority || 2)}</td>
       <td>${mapStatus(ticket.status || 'Open')}</td>
       <td>${ticket.assigned_to || 'Unassigned'}</td>
-      <td><a href="#" class="view-link">View</a></td>
+      <td><a href="view_tickets.html">View</a></td>
     `;
     tbody.appendChild(tr);
   });
