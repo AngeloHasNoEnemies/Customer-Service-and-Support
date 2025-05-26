@@ -18,6 +18,16 @@
     </form>
   </div>
 
-  <script src="signup.js"></script>
+  <script>
+    function handleSignup(event) {
+      event.preventDefault();
+
+      alert("Sign up successful!");
+
+      setTimeout(() => {
+        window.location.href = "customer_login.html";
+      }, 500);
+    }
+  </script>
 </body>
 </html>

@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <title>Login - Support System</title>
   <link rel="stylesheet" href="style/login.css">
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Customer Login</h2>
+    <form onsubmit="handleLogin(event)">
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+      <p>Don't have an account? <a href="customer_signup.html">Sign up</a></p>
+    </form>
+  </div>
   <script>
     function handleLogin(event) {
       event.preventDefault(); 
@@ -23,16 +34,5 @@
       }
     }
   </script>
-</head>
-<body>
-  <div class="auth-container">
-    <h2>Customer Login</h2>
-    <form onsubmit="handleLogin(event)">
-      <input type="email" placeholder="Email" required />
-      <input type="password" placeholder="Password" required />
-      <button type="submit">Login</button>
-      <p>Don't have an account? <a href="customer_signup.html">Sign up</a></p>
-    </form>
-  </div>
 </body>
 </html>
