@@ -21,6 +21,7 @@
       <div class="navbar-right">
         <a href="#">👤 Profile</a>
         <a href="#">🔔 Notifications</a>
+        <a href="#" onclick="handleLogout()" class="logout-btn">🚪 Logout</a>
       </div>
     </div>
   </nav>
@@ -104,6 +105,16 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="customer_dashboard.js"></script>
+  
+  <script>
+    function handleLogout() {
+      // Example: Clear session storage or token
+      sessionStorage.clear(); // or localStorage.clear(); if you used that
+      alert("You have been logged out.");
+      window.location.href = "customer_login.html";
+    }
+  </script>
+
+
 </body>
 </html>
