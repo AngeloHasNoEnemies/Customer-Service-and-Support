@@ -7,12 +7,12 @@
 </head>
 <body>
   <div class="auth-container">
-    <h2>Customer Login</h2>
+    <h2>Admin Login</h2>
     <form onsubmit="handleLogin(event)">
       <input type="email" placeholder="Email" required />
       <input type="password" placeholder="Password" required />
       <button type="submit">Login</button>
-      <p>Don't have an account? <a href="customer_signup.html">Sign up</a></p>
+      <!--<p>Don't have an account? <a href="customer_signup.html">Sign up</a></p>-->
     </form>
     
     <!-- Back to Home Button -->
@@ -30,7 +30,7 @@
 
       if (email && password) {
         alert("Login successful!");
-        window.location.href = "customer.html";
+        window.location.href = "dashboard.html";
       } else {
         alert("Please enter valid credentials.");
       }

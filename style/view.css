@@ -146,6 +146,7 @@ main {
   background-size: 16px;
 }
 
+
 .status-dropdown option[value="open"] {
   background-color: #28a745;
 }
