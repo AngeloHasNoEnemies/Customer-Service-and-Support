@@ -60,6 +60,19 @@ body {
   }
 
 
+.logout-btn {
+  padding: 6px 12px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.logout-btn:hover {
+  background-color: #ffffff;
+}
+
 
 .ticket-container {
     max-width: 650px;

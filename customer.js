@@ -29,3 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 })
+
+function handleLogout() {
+  // Example: Clear session storage or token
+  sessionStorage.clear(); // or localStorage.clear(); if you used that
+  alert("You have been logged out.");
+  window.location.href = "customer_login.html";
+}
+
