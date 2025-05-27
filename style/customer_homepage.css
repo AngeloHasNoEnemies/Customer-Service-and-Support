@@ -164,6 +164,10 @@ body {
   background: #ff9800;
 }
 
+.status.in-progress {
+  background-color: #3498db;
+}
+
 .status.closed {
   background: #4caf50;
 }
