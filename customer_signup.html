@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Create Account - Support System</title>
   <link rel="stylesheet" href="style/login.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <div class="auth-container">
@@ -19,14 +20,31 @@
   </div>
 
   <script>
-    function handleSignup(event) {
+    const SUPABASE_URL = 'https://yzygiaffkaoytroaeodc.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl6eWdpYWZma2FveXRyb2Flb2RjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1Mzg2NTksImV4cCI6MjA2MjExNDY1OX0.no9SbRY08jXaIgbjpnEvTzN4-JBX6WBEBzFtUpGhkgw'
+
+    const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+
+
+    async function handleSignup(event) {
       event.preventDefault();
 
-      alert("Sign up successful!");
+      const name = document.querySelector('input[type="text"]').value;
+      const email = document.querySelector('input[type="email"]').value;
+      const phone = document.querySelector('input[type="tel"]').value;
+      const password = document.querySelector('input[type="password"]').value;
 
-      setTimeout(() => {
+      const { data, error } = await db
+        .from('customers')
+        .insert([{ name, email, phone, password }]);
+
+      if (error) {
+        alert("Signup failed: " + error.message);
+      } else {
+        alert("Sign up successful!");
         window.location.href = "customer_login.html";
-      }, 500);
+      }
     }
   </script>
 </body>

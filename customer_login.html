@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Login - Support System</title>
   <link rel="stylesheet" href="style/login.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <div class="auth-container">
@@ -22,17 +23,31 @@
   </div>
 
   <script>
-    function handleLogin(event) {
+    const SUPABASE_URL = 'https://yzygiaffkaoytroaeodc.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl6eWdpYWZma2FveXRyb2Flb2RjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1Mzg2NTksImV4cCI6MjA2MjExNDY1OX0.no9SbRY08jXaIgbjpnEvTzN4-JBX6WBEBzFtUpGhkgw'
+
+    const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+    
+    async function handleLogin(event) {
       event.preventDefault(); 
 
       const email = document.querySelector('input[type="email"]').value;
       const password = document.querySelector('input[type="password"]').value;
 
-      if (email && password) {
-        alert("Login successful!");
-        window.location.href = "customer_homepage.html";
+      const { data, error } = await db
+        .from('customers')
+        .select('*')
+        .eq('email', email)
+        .eq('password', password)
+        .single();
+
+      if (error || !data) {
+        alert("Login failed: Incorrect email or password.");
       } else {
-        alert("Please enter valid credentials.");
+        alert("Login successful!");
+        sessionStorage.setItem("customerName", data.name);
+        window.location.href = "customer_homepage.html";
       }
     }
   </script>
