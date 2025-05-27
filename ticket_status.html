@@ -26,11 +26,6 @@
   </nav>
 
  <div class="container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <a href="#" class="sidebar-btn">File Ticket</a>
-      <a href="#" class="sidebar-btn">View Ticket</a>
-    </div>
 
     <!-- Main Section -->
     <div class="main">
@@ -70,6 +65,63 @@
     <p class="footer-credit">© 2025 maghanoylookingforbb. All Rights Reserved.</p>
   </footer>
 
+<!-- Chat Toggle Button -->
+<div id="chat-toggle" class="chat-toggle">
+  💬
+</div>
+
+<!-- Chatbox -->
+<div id="chatbox" class="chatbox hidden">
+  <div class="chatbox-header">
+    <div>
+      <div class="ticket-id">Ticket #12345</div>
+      <div class="agent-name">Assigned to: John Doe</div>
+    </div>
+    <button id="close-chat" class="close-btn">−</button>
+  </div>
+
+  <div class="chatbox-messages" id="chat-messages">
+    <div class="message agent">👨‍💼 Hello! How can I assist you with this ticket?</div>
+    <div class="message user">I need help with my ticket</div>
+    <div class="message agent">We'll get back to you shortly.</div>
+  </div>
+
+  <div class="chatbox-input">
+    <input type="text" id="chat-input" placeholder="Type your message..." />
+    <button onclick="sendMessage()">➤</button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.getElementById("chat-toggle");
+    const chatbox = document.getElementById("chatbox");
+    const close = document.getElementById("close-chat");
+
+    toggle.addEventListener("click", () => {
+      chatbox.classList.toggle("hidden");
+    });
+
+    close.addEventListener("click", () => {
+      chatbox.classList.add("hidden");
+    });
+  });
+
+  function sendMessage() {
+    const input = document.getElementById("chat-input");
+    const msg = input.value.trim();
+    const chat = document.getElementById("chat-messages");
+
+    if (msg !== "") {
+      const div = document.createElement("div");
+      div.className = "message user";
+      div.textContent = msg;
+      chat.appendChild(div);
+      input.value = "";
+      chat.scrollTop = chat.scrollHeight;
+    }
+  }
+</script>
 
 </body>
 </html>
