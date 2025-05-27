@@ -42,7 +42,7 @@
         <p class="count">-</p>
       </div>
       <div class="card closed">
-        <h3>Resolved</h3>
+        <h3>Closed</h3>
         <p class="count">-</p>
       </div>
     </div>
@@ -124,10 +124,12 @@
         // Count tickets by status
         const counts = { Open: 0, 'In Progress': 0, Resolved: 0 };
         tickets.forEach(t => {
-          if (counts.hasOwnProperty(t.status)) {
-            counts[t.status]++;
-          }
-        });
+      const normalized = t.status?.trim().toLowerCase().replace(/\s+/g, ' ');
+      if (normalized.includes('open')) counts.Open++;
+      else if (normalized.includes('progress')) counts['In Progress']++;
+      else if (normalized.includes('Resolved') || normalized.includes('closed')) counts.Resolved++;
+
+      });
 
         document.querySelector('.card.open p').textContent = counts.Open;
         document.querySelector('.card.progress p').textContent = counts['In Progress'];
@@ -146,7 +148,7 @@
             <tr>
               <td>${new Date(t.created_at).toLocaleDateString()}</td>
               <td>${t.issue}</td>
-              <td><span class="status ${t.status.toLowerCase().replace(' ', '-')}">${t.status}</span></td>
+              <td><span class="status ${t.status.trim().toLowerCase().replace(/\s+/g, '-')}">${t.status}</span></td>
               <td><a href="view_ticket.html?ticket=${t.ticket_id}">View</a></td>
             </tr>
           `).join('');
