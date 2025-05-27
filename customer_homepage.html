@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Customer Dashboard</title>
   <link rel="stylesheet" href="style/customer_homepage.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <nav class="navbar">
@@ -34,15 +35,15 @@
     <div class="overview-cards">
       <div class="card open">
         <h3>Open Tickets</h3>
-        <p>2</p>
+        <p class="count">-</p>
       </div>
       <div class="card progress">
         <h3>In Progress</h3>
-        <p>1</p>
+        <p class="count">-</p>
       </div>
       <div class="card closed">
         <h3>Resolved</h3>
-        <p>5</p>
+        <p class="count">-</p>
       </div>
     </div>
 
@@ -59,19 +60,7 @@
           </tr>
         </thead>
         <tbody id="history-body">
-          <!-- Data to be populated dynamically -->
-          <tr>
-            <td>May 20, 2025</td>
-            <td>Return Request</td>
-            <td><span class="status closed">Resolved</span></td>
-            <td><a href="view_ticket.html">View</a></td>
-          </tr>
-          <tr>
-            <td>May 18, 2025</td>
-            <td>Damaged Item</td>
-            <td><span class="status open">Open</span></td>
-            <td><a href="view_ticket.html">View</a></td>
-          </tr>
+          <tr><td colspan="4">Loading...</td></tr>
         </tbody>
       </table>
     </section>
@@ -104,27 +93,72 @@
     <p class="footer-credit">© 2025 maghanoylookingforbb. All Rights Reserved.</p>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  
+  <!-- Supabase Logic -->
   <script>
+    const SUPABASE_URL = 'https://yzygiaffkaoytroaeodc.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl6eWdpYWZma2FveXRyb2Flb2RjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1Mzg2NTksImV4cCI6MjA2MjExNDY1OX0.no9SbRY08jXaIgbjpnEvTzN4-JBX6WBEBzFtUpGhkgw';
 
-  const customerName = sessionStorage.getItem("customerName");
-  if (customerName) {
-    document.getElementById("welcome-heading").textContent = `Welcome, ${customerName}!`;
-  } else {
-    document.getElementById("welcome-heading").textContent = "Welcome!";
-  }
+    const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    function handleLogout() {
-      // Example: Clear session storage or token
-      sessionStorage.clear(); // or localStorage.clear(); if you used that
-      alert("You have been logged out.");
-      window.location.href = "customer_login.html";
-    }
+    const customerId = sessionStorage.getItem('customerId');
+      if (!customerId) {
+        window.location.href = 'customer_login.html';
+      }
 
+      const customerName = sessionStorage.getItem('customerName');
+      document.getElementById('welcome-heading').textContent =
+        customerName ? `Welcome, ${customerName}!` : 'Welcome!';
 
+      async function loadDashboard() {
+        // Fetch all tickets for the customer
+        const { data: tickets, error } = await db
+          .from('support_tickets')
+          .select('ticket_id, issue, status, created_at')
+          .eq('customer_id', customerId);
+
+        if (error) {
+          console.error('Failed to load tickets', error);
+          return;
+        }
+
+        // Count tickets by status
+        const counts = { Open: 0, 'In Progress': 0, Resolved: 0 };
+        tickets.forEach(t => {
+          if (counts.hasOwnProperty(t.status)) {
+            counts[t.status]++;
+          }
+        });
+
+        document.querySelector('.card.open p').textContent = counts.Open;
+        document.querySelector('.card.progress p').textContent = counts['In Progress'];
+        document.querySelector('.card.closed p').textContent = counts.Resolved;
+
+        // Display recent tickets (last 5)
+        const sortedTickets = tickets
+          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+          .slice(0, 5);
+
+        const tbody = document.getElementById('history-body');
+        if (!sortedTickets.length) {
+          tbody.innerHTML = `<tr><td colspan="4">No tickets found.</td></tr>`;
+        } else {
+          tbody.innerHTML = sortedTickets.map(t => `
+            <tr>
+              <td>${new Date(t.created_at).toLocaleDateString()}</td>
+              <td>${t.issue}</td>
+              <td><span class="status ${t.status.toLowerCase().replace(' ', '-')}">${t.status}</span></td>
+              <td><a href="view_ticket.html?ticket=${t.ticket_id}">View</a></td>
+            </tr>
+          `).join('');
+        }
+      }
+
+      function handleLogout() {
+        sessionStorage.clear();
+        window.location.href = 'customer_login.html';
+      }
+
+      document.addEventListener('DOMContentLoaded', loadDashboard);
   </script>
-
-
 </body>
 </html>
