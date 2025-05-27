@@ -33,24 +33,24 @@
 
     <form id="ticket-form">
       <label for="name">Full Name</label>
-      <input type="text" id="name" name="name" required />
+      <input type="text" id="name" name="name" readonly />
 
       <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" required />
+      <input type="email" id="email" name="email" readonly />
 
       <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" name="phone" required />
+      <input type="tel" id="phone" name="phone" readonly />
 
       <label for="issue">Issue</label>
       <select id="issue" name="issue" required>
         <option value="" disabled selected>Select an issue</option>
-        <option value="missing_item">Missing Item</option>
-        <option value="damaged_item">Damaged Item</option>
-        <option value="late_delivery">Late Delivery</option>
-        <option value="warranty_claim">Warranty Claim</option>
-        <option value="return_request">Return Request</option>
-        <option value="technical_support">Technical Support</option>
-        <option value="other">Other</option>
+        <option value="Missing item">Missing Item</option>
+        <option value="Damaged item">Damaged Item</option>
+        <option value="Late delivery">Late Delivery</option>
+        <option value="Warranty claim">Warranty Claim</option>
+        <option value="Return request">Return Request</option>
+        <option value="Technical support">Technical Support</option>
+        <option value="Other">Other</option>
       </select>
 
       <label for="order_details">Description</label>
@@ -73,8 +73,6 @@
     </div>
     <p class="footer-credit">© 2025 maghanoylookingforbb. All Rights Reserved.</p>
   </footer>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="customer.js"></script>
 
 </body>

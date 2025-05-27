@@ -8,26 +8,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!form) return
 
+  
+
   form.addEventListener('submit', async (e) => {
-    e.preventDefault()
+  e.preventDefault();
 
-    const name = form.name.value.trim()
-    const email = form.email.value.trim()
-    const phone = form.phone.value.trim()
-    const issue = form.issue.value
-    const order_details = form.order_details.value.trim()
+  const name = form.name.value.trim();
+  const email = form.email.value.trim();
+  const phone = form.phone.value.trim();
+  const issue = form.issue.value;
+  const order_details = form.order_details.value.trim();
 
-    const { data, error } = await db
-      .from('main')
-      .insert([{ name, email, phone, issue, order_details }])
+  const { error } = await db
+    .from('main')
+    .insert([{ name, email, phone, issue, order_details }]);
 
-    if (error) {
-      alert('Error submitting ticket: ' + error.message)
-    } else {
-      alert('Ticket submitted successfully! Thank you 🥳')
-      form.reset()
-    }
-  })
+  if (error) {
+    alert('Error submitting ticket: ' + error.message);
+  } else {
+    alert('Ticket submitted successfully! Thank you 🥳');
+    form.reset();
+  }
+});
 })
 
 function handleLogout() {
