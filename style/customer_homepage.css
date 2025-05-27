@@ -226,3 +226,124 @@ body {
 .footer a:hover {
   color: #0602ff;
 }
+
+.chat-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #1e3a8a;
+  color: white;
+  font-size: 26px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+
+.chatbox {
+  position: fixed;
+  bottom: 100px;
+  right: 24px;
+  width: 360px;
+  max-height: 500px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+
+.chatbox-header {
+  background-color: #1e3a8a;
+  color: white;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chatbox-header .ticket-id {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.chatbox-header .agent-name {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+.chatbox-messages {
+  padding: 16px;
+  flex: 1;
+  overflow-y: auto;
+  background-color: #f8f8f8;
+}
+
+.message {
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.message.agent {
+  background-color: #e2ecf9;
+  align-self: flex-start;
+}
+
+.message.user {
+  background-color: #ebeeeb;
+  align-self: flex-start;
+  text-align: left;
+}
+
+
+.chatbox-input {
+  display: flex;
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  background-color: white;
+}
+
+.chatbox-input input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+}
+
+.chatbox-input button {
+  margin-left: 8px;
+  padding: 0 14px;
+  border-radius: 20px;
+  background-color: #1e3a8a;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
