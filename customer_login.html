@@ -46,6 +46,7 @@
         alert("Login failed: Incorrect email or password.");
       } else {
         alert("Login successful!");
+        sessionStorage.setItem('customerId', data.customer_id);
         sessionStorage.setItem("customerName", data.name);
         sessionStorage.setItem("customerEmail", data.email);
         sessionStorage.setItem("customerPhone", data.phone);
