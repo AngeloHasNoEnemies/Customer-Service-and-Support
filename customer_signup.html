@@ -43,9 +43,14 @@
         alert("Signup failed: " + error.message);
       } else {
         alert("Sign up successful!");
+        sessionStorage.setItem("customerName", data.name);
+        sessionStorage.setItem("customerEmail", data.email);
+        sessionStorage.setItem("customerPhone", data.phone);
         window.location.href = "customer_login.html";
       }
     }
+
+    
   </script>
 </body>
 </html>

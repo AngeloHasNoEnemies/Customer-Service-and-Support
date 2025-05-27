@@ -47,9 +47,14 @@
       } else {
         alert("Login successful!");
         sessionStorage.setItem("customerName", data.name);
+        sessionStorage.setItem("customerEmail", data.email);
+        sessionStorage.setItem("customerPhone", data.phone);
         window.location.href = "customer_homepage.html";
       }
     }
+
+    
+    
   </script>
 </body>
 </html>
