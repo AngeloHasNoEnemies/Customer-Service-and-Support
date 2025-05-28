@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Customer Support Analytics</title>
   <link rel="stylesheet" href="style/analytics.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -49,14 +50,31 @@
 
 
     <div class="ca-charts-section">
-      <div class="ca-chart-box">
-        <h3 class="ca-chart-title">Ticket Volume by Category</h3>
-        <div class="ca-chart-placeholder">[Chart Placeholder]</div>
+    <div class="ca-chart-box">
+      <h3 class="ca-chart-title">Ticket Volume by Category</h3>
+      <div class="fake-bar-chart">
+        <div class="bar" style="height: 70%">Login</div>
+        <div class="bar" style="height: 50%">Return</div>
+        <div class="bar" style="height: 35%">Warranty</div>
+        <div class="bar" style="height: 20%">Shipping</div>
       </div>
-      <div class="ca-chart-box">
-        <h3 class="ca-chart-title">Satisfaction Trend</h3>
-        <div class="ca-chart-placeholder">[Chart Placeholder]</div>
+    </div>
+
+    <div class="ca-chart-box">
+      <h3 class="ca-chart-title">Satisfaction Trend</h3>
+      <div class="fake-line-chart">
+        <div class="dot" style="left: 0%; bottom: 80%"></div>
+        <div class="dot" style="left: 20%; bottom: 85%"></div>
+        <div class="dot" style="left: 40%; bottom: 82%"></div>
+        <div class="dot" style="left: 60%; bottom: 90%"></div>
+        <div class="dot" style="left: 80%; bottom: 89%"></div>
+        <div class="dot" style="left: 100%; bottom: 91%"></div>
+        <svg class="line-path" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <polyline points="0,20 20,15 40,18 60,10 80,11 100,9" fill="none" stroke="#22c55e" stroke-width="2"/>
+        </svg>
       </div>
+    </div>
+
     </div>
 
 
