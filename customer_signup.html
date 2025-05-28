@@ -20,12 +20,10 @@
   </div>
 
   <script>
-    const SUPABASE_URL = 'https://yzygiaffkaoytroaeodc.supabase.co'
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl6eWdpYWZma2FveXRyb2Flb2RjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1Mzg2NTksImV4cCI6MjA2MjExNDY1OX0.no9SbRY08jXaIgbjpnEvTzN4-JBX6WBEBzFtUpGhkgw'
+    const SUPABASE_URL = 'https://iradphcrwwokdrnhxpnd.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlyYWRwaGNyd3dva2Rybmh4cG5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY3MTI5ODEsImV4cCI6MjA2MjI4ODk4MX0.X1okOgCMPHNh_vufxDnSlENTO99tMDjkSOXMeWawNrU'
 
     const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-
-
 
     async function handleSignup(event) {
       event.preventDefault();
@@ -35,22 +33,34 @@
       const phone = document.querySelector('input[type="tel"]').value;
       const password = document.querySelector('input[type="password"]').value;
 
+      // Get current timestamp for create_at
+      const create_at = new Date().toISOString();
+      
+      // Set addressid to null or 0 since it's required but not collected in form
+      const addressid = null;
+
       const { data, error } = await db
         .from('customers')
-        .insert([{ name, email, phone, password }]);
+        .insert([{ 
+          name, 
+          email, 
+          phone, 
+          create_at, 
+          addressid, 
+          password 
+        }])
+        .select();
 
       if (error) {
         alert("Signup failed: " + error.message);
       } else {
         alert("Sign up successful!");
-        sessionStorage.setItem("customerName", data.name);
-        sessionStorage.setItem("customerEmail", data.email);
-        sessionStorage.setItem("customerPhone", data.phone);
+        sessionStorage.setItem("customerName", name);
+        sessionStorage.setItem("customerEmail", email);
+        sessionStorage.setItem("customerPhone", phone);
         window.location.href = "customer_login.html";
       }
     }
-
-    
   </script>
 </body>
 </html>
