@@ -58,6 +58,16 @@ body {
 .navbar-right {
   display: flex;
   align-items: center;
+  
+}
+
+.profile {
+  padding: 6px 12px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 10px;
 }
 
 .logout-btn {
@@ -69,9 +79,28 @@ body {
   margin-left: 10px;
 }
 
+.notif {
+  padding: 6px 12px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.profile:hover {
+  background-color: #ffffff;
+}
+
+.notif:hover {
+  background-color: #ffffff;
+}
+
 .logout-btn:hover {
   background-color: #ffffff;
 }
+
+
 
 .dashboard {
   max-width: 1200px;
