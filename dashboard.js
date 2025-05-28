@@ -18,27 +18,27 @@ function mapStatus(status) {
 
 // Load and render dashboard metrics and tickets
 async function loadDashboard() {
-  const { data: main, error } = await client
-    .from('main')
+  const { data: tickets, error } = await client
+    .from('support_tickets')
     .select('*')
     .order('created_at', { ascending: false });
 
   if (error) {
-    console.error('Error fetching main:', error);
+    console.error('Error fetching support_tickets:', error);
     alert('Failed to load tickets data.');
     return;
   }
 
   // ✅ Metrics
-  document.querySelector('.metric-box:nth-child(1) span').textContent = main.length;
+  document.querySelector('.metric-box:nth-child(1) span').textContent = tickets.length;
 
-  const pendingReturns = main.filter(
+  const pendingReturns = tickets.filter(
     t => t.issue === 'return_request' && t.status?.toLowerCase() === 'pending'
   ).length;
   document.querySelector('.metric-box:nth-child(2) span').textContent = pendingReturns;
 
   const now = new Date();
-  const slaAlerts = main.filter(t => {
+  const slaAlerts = tickets.filter(t => {
     if (!t.status) return false;
     const lowerStatus = t.status.toLowerCase();
     if (lowerStatus === 'open' || lowerStatus === 'pending') {
@@ -57,17 +57,17 @@ async function loadDashboard() {
   const tbody = document.querySelector('.tickets-table tbody');
   tbody.innerHTML = '';
 
-  main.forEach(ticket => {
+  tickets.forEach(ticket => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td>${ticket.main_id || 'N/A'}</td>
-      <td>${ticket.name || 'Unknown'}</td>
+      <td>${ticket.ticket_id || 'N/A'}</td>
+      <td>${ticket.customer_id || 'Unknown'}</td>
       <td>${ticket.issue || 'N/A'}</td>
       <td>${mapPriority(ticket.priority || 2)}</td>
       <td>${mapStatus(ticket.status || 'Open')}</td>
       <td>${ticket.created_at || 'N/A'}</td>
       <td>${ticket.assigned_to || 'Unassigned'}</td>
-      <td><a href="view_tickets.html">View</a></td>
+      <td><a href="view_tickets.html?id=${ticket.ticket_id}">View</a></td>
     `;
     tbody.appendChild(tr);
   });
