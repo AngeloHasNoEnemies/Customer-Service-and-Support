@@ -13,7 +13,7 @@
       <div class="navbar-left">
         <div class="navbar-title">Customer Service & Support</div>
         <div class="navbar-links">
-          <a href="#">Dashboard</a>
+          <a href="customer_homepage.html">Dashboard</a>
           <a href="customer.html">Submit Ticket</a>
           <a href="feedback.html">Feedback</a>
         </div>
@@ -30,7 +30,6 @@
     <h1 id="welcome-heading">Welcome!</h1>
     <p class="subheading">Here's a quick overview of your service activity.</p>
 
-    <!-- Overview Cards -->
     <div class="overview-cards">
       <div class="card open">
         <h3>Open Tickets</h3>
@@ -46,7 +45,6 @@
       </div>
     </div>
 
-    <!-- Transaction History -->
     <section class="history-section">
       <h2>Transaction History</h2>
       <table class="history-table">
@@ -64,7 +62,6 @@
       </table>
     </section>
 
-    <!-- Feedback or Complaint Section -->
     <section class="feedback-section">
       <h2>Your Submitted Feedback</h2>
       <ul class="feedback-list">
@@ -80,12 +77,8 @@
     </section>
   </main>
 
-  <!-- Chat Toggle Button -->
-  <div id="chat-toggle" class="chat-toggle">
-    💬
-  </div>
+  <div id="chat-toggle" class="chat-toggle">💬</div>
 
-  <!-- Chatbox -->
   <div id="chatbox" class="chatbox hidden">
     <div class="chatbox-header">
       <div>
@@ -105,7 +98,8 @@
       <input type="text" id="chat-input" placeholder="Type your message..." />
       <button onclick="sendMessage()">➤</button>
     </div>
-</div>
+  </div>
+
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-info">
@@ -118,106 +112,64 @@
     <p class="footer-credit">© 2025 maghanoylookingforbb. All Rights Reserved.</p>
   </footer>
 
-  <!-- Chat Box -->
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const toggle = document.getElementById("chat-toggle");
-    const chatbox = document.getElementById("chatbox");
-    const close = document.getElementById("close-chat");
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggle = document.getElementById("chat-toggle");
+      const chatbox = document.getElementById("chatbox");
+      const close = document.getElementById("close-chat");
 
-    toggle.addEventListener("click", () => {
-      chatbox.classList.toggle("hidden");
-    });
-
-    close.addEventListener("click", () => {
-      chatbox.classList.add("hidden");
-    });
-  });
-
-  function sendMessage() {
-    const input = document.getElementById("chat-input");
-    const msg = input.value.trim();
-    const chat = document.getElementById("chat-messages");
-
-    if (msg !== "") {
-      const div = document.createElement("div");
-      div.className = "message user";
-      div.textContent = msg;
-      chat.appendChild(div);
-      input.value = "";
-      chat.scrollTop = chat.scrollHeight;
-    }
-  }
-</script>
-
-  <!-- Supabase Logic -->
-  <script>
-    const SUPABASE_URL = 'https://yzygiaffkaoytroaeodc.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl6eWdpYWZma2FveXRyb2Flb2RjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1Mzg2NTksImV4cCI6MjA2MjExNDY1OX0.no9SbRY08jXaIgbjpnEvTzN4-JBX6WBEBzFtUpGhkgw';
-
-    const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    const customerId = sessionStorage.getItem('customerId');
-      if (!customerId) {
-        window.location.href = 'customer_login.html';
-      }
-
-      const customerName = sessionStorage.getItem('customerName');
-      document.getElementById('welcome-heading').textContent =
-        customerName ? `Welcome, ${customerName}!` : 'Welcome!';
-
-      async function loadDashboard() {
-        // Fetch all tickets for the customer
-        const { data: tickets, error } = await db
-          .from('support_tickets')
-          .select('ticket_id, issue, status, created_at')
-          .eq('customer_id', customerId);
-
-        if (error) {
-          console.error('Failed to load tickets', error);
-          return;
-        }
-
-        // Count tickets by status
-        const counts = { Open: 0, 'In Progress': 0, Resolved: 0 };
-        tickets.forEach(t => {
-      const normalized = t.status?.trim().toLowerCase().replace(/\s+/g, ' ');
-      if (normalized.includes('open')) counts.Open++;
-      else if (normalized.includes('progress')) counts['In Progress']++;
-      else if (normalized.includes('Resolved') || normalized.includes('closed')) counts.Resolved++;
-
+      toggle.addEventListener("click", () => {
+        chatbox.classList.toggle("hidden");
       });
 
-        document.querySelector('.card.open p').textContent = counts.Open;
-        document.querySelector('.card.progress p').textContent = counts['In Progress'];
-        document.querySelector('.card.closed p').textContent = counts.Resolved;
+      close.addEventListener("click", () => {
+        chatbox.classList.add("hidden");
+      });
+    });
 
-        // Display recent tickets (last 5)
-        const sortedTickets = tickets
-          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-          .slice(0, 5);
+    function sendMessage() {
+      const input = document.getElementById("chat-input");
+      const msg = input.value.trim();
+      const chat = document.getElementById("chat-messages");
 
-        const tbody = document.getElementById('history-body');
-        if (!sortedTickets.length) {
-          tbody.innerHTML = `<tr><td colspan="4">No tickets found.</td></tr>`;
-        } else {
-          tbody.innerHTML = sortedTickets.map(t => `
-            <tr>
-              <td>${new Date(t.created_at).toLocaleDateString()}</td>
-              <td>${t.issue}</td>
-              <td><span class="status ${t.status.trim().toLowerCase().replace(/\s+/g, '-')}">${t.status}</span></td>
-              <td><a href="view_ticket.html?ticket=${t.ticket_id}">View</a></td>
-            </tr>
-          `).join('');
-        }
+      if (msg !== "") {
+        const div = document.createElement("div");
+        div.className = "message user";
+        div.textContent = msg;
+        chat.appendChild(div);
+        input.value = "";
+        chat.scrollTop = chat.scrollHeight;
       }
-
-      function handleLogout() {
-        sessionStorage.clear();
-        window.location.href = 'customer_login.html';
-      }
-
-      document.addEventListener('DOMContentLoaded', loadDashboard);
+    }
   </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+  // Supabase credentials
+  const SUPABASE_URL = 'https://iradphcrwwokdrnhxpnd.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlyYWRwaGNyd3dva2Rybmh4cG5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY3MTI5ODEsImV4cCI6MjA2MjI4ODk4MX0.X1okOgCMPHNh_vufxDnSlENTO99tMDjkSOXMeWawNrU'; 
+
+  // Avoid name conflict by using a new variable name
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Example: Fetching tickets for a specific customer
+  async function fetchTickets(customerId) {
+    const { data: tickets, error } = await supabaseClient
+      .from('support_tickets')
+      .select('ticket_id, issue_type, status, created_at')
+      .eq('customer_id', customerId);
+
+    if (error) {
+      console.error('Ticket Fetch Error 😵‍💫:', error.message);
+    } else {
+      console.log('Tickets 🎟️:', tickets);
+      // Do something with the data uwu
+    }
+  }
+
+  // Example usage
+  fetchTickets(1); // Replace 1 with actual customer_id
+</script>
 </body>
 </html>
