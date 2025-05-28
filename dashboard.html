@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Customer Service and Support</title>
+  <title>Admin Dashboard - Customer Support</title>
   <link rel="stylesheet" href="style/dashboard.css" />
 </head>
 <body>
   <nav class="navbar">
     <div class="navbar-inner">
       <div class="navbar-left">
-        <div class="navbar-title">Customer Service and Support</div>
+        <div class="navbar-title">Customer Support Admin</div>
         <div class="navbar-links">
           <a href="index.html">Home</a>
-          <a href="dashboard.html">Dashboard</a>
+          <a href="dashboard.html" class="active">Dashboard</a>
           <a href="analytics.html">Analytics</a>
         </div>
       </div>
@@ -24,7 +24,7 @@
     </div>
   </nav>
 
-  <div class="main-container">
+  <main class="main-container">
     <section class="metrics">
       <div class="metric-box">Total Tickets<br><span>Loading...</span></div>
       <div class="metric-box">Pending Returns<br><span>Loading...</span></div>
@@ -48,25 +48,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td colspan="7" style="text-align:center;">Loading tickets...</td></tr>
+          <tr><td colspan="8" style="text-align:center;">Loading tickets...</td></tr>
         </tbody>
       </table>
     </section>
 
-    <br>
-    <br>
-
     <section class="section-title">Feedback Summary</section>
     <section class="feedback-summary">
-    <div class="feedback-card csat-chart-container">
-      <div class="csat-score-text">89%</div>
-      <canvas id="csatChart" width="200" height="200"></canvas>
-    </div>
-    
-    <br>
-    <br>
-    <br>
-  </div>
+      <div class="feedback-card csat-chart-container">
+        <div class="csat-score-text">89%</div>
+        <canvas id="csatChart" width="200" height="200"></canvas>
+      </div>
+    </section>
+  </main>
 
   <footer class="footer">
     <div class="footer-container">
@@ -76,47 +70,43 @@
         <p>Phone: <a href="tel:+123456789">09999999999</a></p>
         <p>Location: Cagayan de Oro City</p>
       </div>
+      <p class="footer-credit">© 2025 maghanoylookingforbb. All Rights Reserved.</p>
     </div>
-    <p class="footer-credit">© 2025 maghanoylookingforbb. All Rights Reserved.</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="dashboard.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-  const ctx = document.getElementById('csatChart').getContext('2d');
+  <script>
+    const ctx = document.getElementById('csatChart').getContext('2d');
 
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: ['Satisfied', 'Neutral', 'Unsatisfied'],
-      datasets: [{
-        label: 'CSAT Breakdown',
-        data: [72, 17, 11],
-        backgroundColor: ['#4ade80', '#facc15', '#ef4444'],
-        borderWidth: 0,
-        hoverOffset: 10
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      cutout: '70%',
-      plugins: {
-        legend: {
-          display: false
-        },
-        tooltip: {
-          callbacks: {
-            label: ctx => `${ctx.label}: ${ctx.parsed}%`
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Satisfied', 'Neutral', 'Unsatisfied'],
+        datasets: [{
+          label: 'CSAT Breakdown',
+          data: [72, 17, 11],
+          backgroundColor: ['#4ade80', '#facc15', '#ef4444'],
+          borderWidth: 0,
+          hoverOffset: 10
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '70%',
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => `${ctx.label}: ${ctx.parsed}%`
+            }
           }
         }
       }
-    }
-  });
-</script>
-
-
+    });
+  </script>
 </body>
 </html>
