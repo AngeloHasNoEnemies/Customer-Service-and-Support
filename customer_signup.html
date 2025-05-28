@@ -25,6 +25,8 @@
 
     const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
+
+
     async function handleSignup(event) {
       event.preventDefault();
 
@@ -33,34 +35,22 @@
       const phone = document.querySelector('input[type="tel"]').value;
       const password = document.querySelector('input[type="password"]').value;
 
-      // Get current timestamp for create_at
-      const create_at = new Date().toISOString();
-      
-      // Set addressid to null or 0 since it's required but not collected in form
-      const addressid = null;
-
       const { data, error } = await db
         .from('customers')
-        .insert([{ 
-          name, 
-          email, 
-          phone, 
-          create_at, 
-          addressid, 
-          password 
-        }])
-        .select();
+        .insert([{ name, email, phone, password }]);
 
       if (error) {
         alert("Signup failed: " + error.message);
       } else {
         alert("Sign up successful!");
-        sessionStorage.setItem("customerName", name);
-        sessionStorage.setItem("customerEmail", email);
-        sessionStorage.setItem("customerPhone", phone);
+        sessionStorage.setItem("customerName", data.name);
+        sessionStorage.setItem("customerEmail", data.email);
+        sessionStorage.setItem("customerPhone", data.phone);
         window.location.href = "customer_login.html";
       }
     }
+
+    
   </script>
 </body>
 </html>

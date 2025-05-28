@@ -1,5 +1,6 @@
-const SUPABASE_URL = 'https://yzygiaffkaoytroaeodc.supabase.co'
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl6eWdpYWZma2FveXRyb2Flb2RjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1Mzg2NTksImV4cCI6MjA2MjExNDY1OX0.no9SbRY08jXaIgbjpnEvTzN4-JBX6WBEBzFtUpGhkgw'
+const SUPABASE_URL = 'https://iradphcrwwokdrnhxpnd.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlyYWRwaGNyd3dva2Rybmh4cG5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY3MTI5ODEsImV4cCI6MjA2MjI4ODk4MX0.X1okOgCMPHNh_vufxDnSlENTO99tMDjkSOXMeWawNrU'; 
+
 
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
@@ -7,9 +8,7 @@ const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 document.getElementById('ticket-form').addEventListener('submit', async function (event) {
   event.preventDefault();
 
-  const name = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim();
-  const phone = document.getElementById('phone').value.trim();
   const issue = document.getElementById('issue').value;
   const description = document.getElementById('order_details').value.trim();
 
@@ -44,21 +43,6 @@ document.getElementById('ticket-form').addEventListener('submit', async function
         escalated_to: null,
         description
       }]);
-
-      // 3. Also insert into 'main' table
-    const { error: mainError } = await db
-      .from('main')
-      .insert([{
-        name,
-        email,
-        phone,
-        issue,
-        order_details: description
-      }]);
-
-    if (mainError) {
-      console.error("Failed to insert into main table:", mainError.message);
-    }
 
     if (ticketError) {
       alert("Failed to submit ticket: " + ticketError.message);
