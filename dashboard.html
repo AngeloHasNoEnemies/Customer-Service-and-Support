@@ -53,26 +53,19 @@
       </table>
     </section>
 
+    <br>
+    <br>
+
     <section class="section-title">Feedback Summary</section>
     <section class="feedback-summary">
-      <div class="feedback-card">
-        <strong>CSAT:</strong> 89%<br>[Graph Placeholder]
-      </div>
-      <div class="feedback-card">
-        <strong>NPS:</strong> 78<br>[Graph Placeholder]
-      </div>
-      <div class="feedback-card">
-        <strong>Common Issues:</strong><br>Delivery delay, Wrong item, Return process
-      </div>
-    </section>
-
-    <section class="section-title">Knowledge Base Quick Links</section>
-    <section class="kb-links">
-      <a href="#">FAQs</a>
-      <a href="#">Troubleshooting Guides</a>
-      <a href="#">Product Manuals</a>
-      <a href="#">Video Tutorials</a>
-    </section>
+    <div class="feedback-card csat-chart-container">
+      <div class="csat-score-text">89%</div>
+      <canvas id="csatChart" width="200" height="200"></canvas>
+    </div>
+    
+    <br>
+    <br>
+    <br>
   </div>
 
   <footer class="footer">
@@ -89,5 +82,41 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="dashboard.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('csatChart').getContext('2d');
+
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Satisfied', 'Neutral', 'Unsatisfied'],
+      datasets: [{
+        label: 'CSAT Breakdown',
+        data: [72, 17, 11],
+        backgroundColor: ['#4ade80', '#facc15', '#ef4444'],
+        borderWidth: 0,
+        hoverOffset: 10
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '70%',
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.label}: ${ctx.parsed}%`
+          }
+        }
+      }
+    }
+  });
+</script>
+
+
 </body>
 </html>

@@ -29,6 +29,8 @@ async function loadDashboard() {
     return;
   }
 
+  
+
   // ✅ Metrics
   document.querySelector('.metric-box:nth-child(1) span').textContent = main.length;
 
@@ -77,3 +79,4 @@ async function loadDashboard() {
 document.addEventListener('DOMContentLoaded', () => {
   loadDashboard();
 });
+
