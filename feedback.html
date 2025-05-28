@@ -5,11 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Customer Feedback</title>
   <link rel="stylesheet" href="style/feedback.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
-    .loading { display: none; text-align: center; margin: 20px 0; }
+    .loading {
+      display: none;
+      text-align: center;
+      margin: 20px 0;
+    }
     .spinner {
       border: 4px solid rgba(0, 0, 0, 0.1);
-      width: 36px; height: 36px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       border-left-color: #09f;
       animation: spin 1s linear infinite;
@@ -25,6 +31,12 @@
       background: #f8d7da;
       border-radius: 4px;
       margin: 10px 0;
+    }
+    .customer-info {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
     }
   </style>
 </head>
@@ -54,14 +66,14 @@
     <section class="feedback-form">
       <h2>Share Your Thoughts</h2>
       <form id="feedbackForm">
-        <div class="form-group">
-          <label for="name">Name (optional)</label>
-          <input type="text" id="name" placeholder="Your Name" />
+        <div class="customer-info" id="customerInfo">
+          <!-- Customer details will load here -->
+          <p>Loading your information...</p>
         </div>
 
         <div class="form-group checkbox-group">
           <input type="checkbox" id="anonymous" />
-          <label for="anonymous">Submit anonymously</label>
+          <label for="anonymous">Submit anonymously (hide your name)</label>
         </div>
 
         <div class="form-group">
@@ -70,20 +82,16 @@
         </div>
 
         <div class="form-group rating-group">
-          <label for="rating">Rate Our Service</label>
+          <label for="rating">Rate Our Service (1-5 stars)</label>
           <div class="rating-stars">
             <input type="radio" id="star5" name="rating" value="5" required />
             <label for="star5" title="5 stars">★</label>
-
             <input type="radio" id="star4" name="rating" value="4" />
             <label for="star4" title="4 stars">★</label>
-
             <input type="radio" id="star3" name="rating" value="3" />
             <label for="star3" title="3 stars">★</label>
-
             <input type="radio" id="star2" name="rating" value="2" />
             <label for="star2" title="2 stars">★</label>
-
             <input type="radio" id="star1" name="rating" value="1" />
             <label for="star1" title="1 star">★</label>
           </div>
@@ -100,7 +108,7 @@
     </div>
 
     <section class="feedback-display">
-      <h2>What Our Customers Are Saying</h2>
+      <h2>Recent Feedback</h2>
       <div class="feedback-list" id="feedbackList">
         <!-- Feedback items will be loaded here -->
       </div>
@@ -118,49 +126,72 @@
     </div>
     <p class="footer-credit">© 2025 maghanoylookingforbb. All Rights Reserved.</p>
   </footer>
- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script>
-  document.addEventListener('DOMContentLoaded', async function() {
-  const supabase = window.supabase.createClient(
-    'https://iradphcrwwokdrnhxpnd.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlyYWRwaGNyd3dva2Rybmh4cG5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY3MTI5ODEsImV4cCI6MjA2MjI4ODk4MX0.X1okOgCMPHNh_vufxDnSlENTO99tMDjkSOXMeWawNrU'
-  );
+    // Supabase Configuration - REPLACE WITH YOUR NEW CREDENTIALS
+    const SUPABASE_URL = 'https://iradphcrwwokdrnhxpnd.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlyYWRwaGNyd3dva2Rybmh4cG5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY3MTI5ODEsImV4cCI6MjA2MjI4ODk4MX0.X1okOgCMPHNh_vufxDnSlENTO99tMDjkSOXMeWawNrU';
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // Check if feedback table exists
-  try {
-    const { error } = await supabase
-      .from('feedback')
-      .select('*')
-      .limit(1);
-    
-    if (error) throw error;
-    setupFeedbackSystem();
-  } catch (error) {
-    console.error('Error:', error);
-    showTableError();
-  }
+    // Get current customer ID (in a real app, this would come from authentication)
+    let currentCustomerId = null; 
 
-  function setupFeedbackSystem() {
-    loadFeedback();
-    
-    document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
+    document.addEventListener('DOMContentLoaded', async () => {
+      // First, load customer data
+      await loadCustomerData();
       
-      const name = document.getElementById('anonymous').checked ? 'Anonymous' : 
-                  (document.getElementById('name').value || 'Anonymous');
+      // Then load existing feedback
+      loadFeedback();
+      
+      // Setup form submission
+      document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        await submitFeedback();
+      });
+    });
+
+    async function loadCustomerData() {
+      try {
+        // In a real app, you would get the customer ID from authentication
+        // For demo, we'll use customer_id=1
+        currentCustomerId = 1;
+        
+        const { data: customer, error } = await supabase
+          .from('customers')
+          .select('*')
+          .eq('customer_id', currentCustomerId)
+          .single();
+        
+        if (error) throw error;
+        
+        document.getElementById('customerInfo').innerHTML = `
+          <p><strong>Customer:</strong> ${customer.name}</p>
+          <p><strong>Email:</strong> ${customer.email}</p>
+          <p><strong>Phone:</strong> ${customer.phone}</p>
+        `;
+      } catch (error) {
+        console.error('Error loading customer:', error);
+        document.getElementById('customerInfo').innerHTML = `
+          <p class="error-message">Could not load customer data</p>
+        `;
+      }
+    }
+
+    async function submitFeedback() {
+      const isAnonymous = document.getElementById('anonymous').checked;
       const comment = document.getElementById('comment').value;
       const rating = document.querySelector('input[name="rating"]:checked').value;
       
       try {
         const { error } = await supabase
-          .from('feedback')
-          .insert([{ 
-            name: name,
+          .from('customers')
+          .update({
+            cast_score: parseInt(rating),
+            npa_score: null, // Not collected in form
             comments: comment,
-            csat_score: parseInt(rating),
-            nps_score: null, // Not collected in form but required by schema
             submitted_at: new Date().toISOString()
-          }]);
+          })
+          .eq('customer_id', currentCustomerId);
         
         if (error) throw error;
         
@@ -169,71 +200,57 @@
         document.getElementById('feedbackForm').reset();
         loadFeedback();
       } catch (error) {
-        console.error('Error:', error);
-        document.getElementById('formMessage').textContent = 'Error submitting feedback.';
+        console.error('Error submitting feedback:', error);
+        document.getElementById('formMessage').textContent = 'Error submitting feedback. Please try again.';
         document.getElementById('formMessage').style.color = 'red';
       }
-    });
-  }
-
-  async function loadFeedback() {
-    const feedbackList = document.getElementById('feedbackList');
-    const loadingElement = document.getElementById('loadingFeedback');
-    
-    feedbackList.innerHTML = '';
-    loadingElement.style.display = 'block';
-    
-    try {
-      const { data: feedback, error } = await supabase
-        .from('feedback')
-        .select('*')
-        .order('submitted_at', { ascending: false })
-        .limit(20);
-      
-      if (error) throw error;
-      
-      if (feedback.length === 0) {
-        feedbackList.innerHTML = '<p>No feedback yet. Be the first to share!</p>';
-      } else {
-        feedback.forEach(item => {
-          const feedbackItem = document.createElement('div');
-          feedbackItem.className = 'feedback-item';
-          feedbackItem.innerHTML = `
-            <strong>${item.name || 'Anonymous'}</strong>
-            <div class="feedback-rating">${'★'.repeat(item.csat_score)}</div>
-            <p>${item.comments}</p>
-            <small>${new Date(item.submitted_at).toLocaleDateString()}</small>
-          `;
-          feedbackList.appendChild(feedbackItem);
-        });
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      feedbackList.innerHTML = '<p class="error-message">Error loading feedback.</p>';
-    } finally {
-      loadingElement.style.display = 'none';
     }
-  }
 
-  function showTableError() {
-    const container = document.querySelector('.container');
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'error-message';
-    errorDiv.innerHTML = `
-      <h3>Database Setup Required</h3>
-      <p>Missing 'feedback' table with these columns:</p>
-      <ul>
-        <li><code>feedback_id</code> (serial)</li>
-        <li><code>csat_score</code> (integer)</li>
-        <li><code>nps_score</code> (integer, nullable)</li>
-        <li><code>comments</code> (text)</li>
-        <li><code>submitted_at</code> (timestamp)</li>
-        <li><code>name</code> (text, nullable)</li>
-      </ul>
-    `;
-    container.prepend(errorDiv);
-  }
-});
-</script>
+    async function loadFeedback() {
+      const feedbackList = document.getElementById('feedbackList');
+      const loadingElement = document.getElementById('loadingFeedback');
+      
+      feedbackList.innerHTML = '';
+      loadingElement.style.display = 'block';
+      
+      try {
+        const { data: feedback, error } = await supabase
+          .from('customers')
+          .select('name, cast_score, comments, submitted_at')
+          .not('comments', 'is', null)
+          .order('submitted_at', { ascending: false })
+          .limit(20);
+        
+        if (error) throw error;
+        
+        if (feedback.length === 0) {
+          feedbackList.innerHTML = '<p>No feedback yet. Be the first to share!</p>';
+        } else {
+          feedback.forEach(item => {
+            const feedbackItem = document.createElement('div');
+            feedbackItem.className = 'feedback-item';
+            feedbackItem.innerHTML = `
+              <strong>${item.name || 'Anonymous'}</strong>
+              <div class="feedback-rating">${'★'.repeat(item.cast_score)}</div>
+              <p>${item.comments}</p>
+              <small>${new Date(item.submitted_at).toLocaleDateString()}</small>
+            `;
+            feedbackList.appendChild(feedbackItem);
+          });
+        }
+      } catch (error) {
+        console.error('Error loading feedback:', error);
+        feedbackList.innerHTML = '<p class="error-message">Error loading feedback.</p>';
+      } finally {
+        loadingElement.style.display = 'none';
+      }
+    }
+
+    function handleLogout() {
+      sessionStorage.clear();
+      alert("You have been logged out.");
+      window.location.href = "customer_login.html";
+    }
+  </script>
 </body>
 </html>
