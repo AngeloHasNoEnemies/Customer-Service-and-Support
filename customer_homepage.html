@@ -21,7 +21,7 @@
       <div class="navbar-right">
         <a href="#" class="profile">👤 Profile</a>
         <a href="#" class="notif">🔔 Notifications</a>
-        <a href="customer_login.html" onclick="handleLogout()" class="logout-btn">🚪 Logout</a>
+        <a href="#" onclick="handleLogout()" class="logout-btn">🚪 Logout</a>
       </div>
     </div>
   </nav>
@@ -152,17 +152,26 @@
 
   <!-- Supabase Logic -->
   <script>
-    const SUPABASE_URL = 'https://iradphcrwwokdrnhxpnd.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlyYWRwaGNyd3dva2Rybmh4cG5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY3MTI5ODEsImV4cCI6MjA2MjI4ODk4MX0.X1okOgCMPHNh_vufxDnSlENTO99tMDjkSOXMeWawNrU'; 
+    const SUPABASE_URL = 'https://iradphcrwwokdrnhxpnd.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlyYWRwaGNyd3dva2Rybmh4cG5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY3MTI5ODEsImV4cCI6MjA2MjI4ODk4MX0.X1okOgCMPHNh_vufxDnSlENTO99tMDjkSOXMeWawNrU'
 
     const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // Example: Fetching tickets for a specific customer
-  async function fetchTickets(customerId) {
-    const { data: tickets, error } = await supabaseClient
-      .from('support_tickets')
-      .select('ticket_id, issue_type, status, created_at')
-      .eq('customer_id', customerId);
+    const customerId = sessionStorage.getItem('customerId');
+      if (!customerId) {
+        window.location.href = 'customer_login.html';
+      }
+
+      const customerName = sessionStorage.getItem('customerName');
+      document.getElementById('welcome-heading').textContent =
+        customerName ? `Welcome, ${customerName}!` : 'Welcome!';
+
+      async function loadDashboard() {
+        // Fetch all tickets for the customer
+        const { data: tickets, error } = await db
+          .from('support_tickets')
+          .select('ticket_id, issue, status, created_at')
+          .eq('customer_id', customerId);
 
         if (error) {
           console.error('Failed to load tickets', error);
