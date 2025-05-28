@@ -11,6 +11,8 @@ document.getElementById('ticket-form').addEventListener('submit', async function
   const email = document.getElementById('email').value.trim();
   const issue = document.getElementById('issue').value;
   const description = document.getElementById('order_details').value.trim();
+  const priority = document.getElementById('priority').value;
+
 
   try {
     // 1. Find the customer by email
@@ -36,7 +38,7 @@ document.getElementById('ticket-form').addEventListener('submit', async function
       .insert([{
         customer_id,
         issue,
-        priority: 'Medium',
+        priority,
         status: 'Open',
         created_at: new Date().toISOString(),
         assigned_to: null,
