@@ -7,19 +7,24 @@ body {
   color: #333;
 }
 
-.navbar {
-    background-color: #08024e;
-    padding: 2.5rem 2rem;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: Arial, sans-serif;
-  }
+  .navbar {
+  background-color: #08024e;
+  padding: 1.25rem 2rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
 .navbar-inner {
   display: flex;
   width: 100%;
+  max-width: 1300px;
   justify-content: space-between;
   align-items: center;
 }
@@ -32,36 +37,37 @@ body {
 }
 
 .navbar-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-right: 2rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
 }
-
 
 .navbar-links {
   display: flex;
-  justify-content: center;
-  flex: 2;
-  gap: 1.5rem;
-  margin-left: 25rem;
+  gap: 1.2rem;
+  margin-left: 7rem;
 }
 
 .navbar-links a,
-  .navbar-right a {
-    margin: 0 0.75rem;
-    color: white;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
+.navbar-right a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+}
 
 .navbar-links a:hover,
 .navbar-right a:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }
 
- .navbar-right {
-    display: flex;
-    align-items: center;
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 
@@ -91,6 +97,15 @@ body {
   text-decoration: none;
   margin-left: 10px;
 }
+
+.profile:hover {
+  background-color: #ffffff;
+}
+
+.notif:hover {
+  background-color: #ffffff;
+}
+
 .logout-btn:hover {
   background-color: #ffffff;
 }
