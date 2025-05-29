@@ -147,16 +147,31 @@ main {
 }
 
 
-.status-dropdown option[value="open"] {
+.status-dropdown option[value="Open"] {
   background-color: #28a745;
 }
 
-.status-dropdown option[value="in-progress"] {
+.status-dropdown option[value="In-Progress"] {
   background-color: #ffc107;
 }
 
-.status-dropdown option[value="closed"] {
+.status-dropdown option[value="Closed"] {
   background-color: #dc3545;
+}
+
+.status-dropdown.open {
+  background-color: #28a745;
+  color: white;
+}
+
+.status-dropdown.In-Progress {
+  background-color: #ffc107;
+  color: black;
+}
+
+.status-dropdown.closed {
+  background-color: #dc3545;
+  color: white;
 }
 
 

@@ -49,9 +49,9 @@
           <label for="status-select"><strong>Status:</strong></label>
           <div class="status-actions">
             <select id="status-select" class="status-dropdown">
-              <option value="open">Open</option>
-              <option value="in-progress">In Progress</option>
-              <option value="closed">Closed</option>
+              <option value="Open">Open</option>
+              <option value="In-Progress">In Progress</option>
+              <option value="Closed">Closed</option>
             </select>
             <button class="save-button" id="saveButton">Save</button>
           </div>
@@ -97,33 +97,38 @@
 
   const SUPABASE_URL = 'https://iradphcrwwokdrnhxpnd.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlyYWRwaGNyd3dva2Rybmh4cG5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY3MTI5ODEsImV4cCI6MjA2MjI4ODk4MX0.X1okOgCMPHNh_vufxDnSlENTO99tMDjkSOXMeWawNrU'; 
-  const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+  const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  let ticket; // Global ticket variable
 
   const urlParams = new URLSearchParams(window.location.search);
     const ticketId = parseInt(urlParams.get("ticket_id"));
 
     document.addEventListener("DOMContentLoaded", async () => {
-      if (!ticketId) {
-        alert("Ticket ID not found.");
-        return;
-      }
+  if (!ticketId) {
+    alert("Ticket ID not found.");
+    return;
+  }
 
-      const { data: ticket, error } = await db
-        .from("support_tickets")
-        .select("*")
-        .eq("ticket_id", ticketId)
-        .single();
+  const { data, error } = await db
+    .from("support_tickets")
+    .select("*")
+    .eq("ticket_id", ticketId)
+    .single();
 
-      if (error || !ticket) {
-        alert("Ticket not found.");
-        return;
-      }
+  ticket = data; // 👈 fix: store it globally
+
+  if (error || !ticket) {
+    alert("Ticket not found.");
+    return;
+  }
 
       document.getElementById("ticketNumber").textContent = `Ticket #${ticket.ticket_id}`;
       document.getElementById("statusBadge").textContent = ticket.status;
       document.getElementById("statusBadge").className = `status-badge ${ticket.status.replace(" ", "-").toLowerCase()}`;
       document.getElementById("status-select").value = ticket.status;
+
+      
 
       document.getElementById("assignedAgent").textContent = ticket.assigned_agent || "Unassigned";
       document.getElementById("lastUpdated").textContent = new Date(ticket.updated_at).toLocaleDateString();
@@ -149,24 +154,38 @@
         `;
       }
 
-      document.getElementById("saveButton").addEventListener("click", async () => {
-        const newStatus = document.getElementById("status-select").value;
+    document.getElementById("saveButton").addEventListener("click", async () => {
+  const newStatus = document.getElementById("status-select").value;
 
-        const { error: updateError } = await db
-          .from("support_tickets")
-          .update({
-            status: newStatus,
-            updated_at: new Date().toISOString()
-          })
-          .eq("ticket_id", ticket.ticket_id);
+  console.log("Trying to update ticket:", ticket.ticket_id);
+  console.log("New status:", newStatus);
 
-        if (updateError) {
-          alert("Failed to update status.");
-        } else {
-          alert("Status updated successfully.");
-          location.reload(); // refresh page to reflect update
-        }
-      });
+  if (!ticket || typeof ticket.ticket_id !== "number") {
+    alert("Invalid ticket ID.");
+    return;
+  }
+
+  // 👇 PLACE IT RIGHT HERE
+  console.log("Ticket ID being updated:", ticket?.ticket_id);
+
+  const { data, error: updateError } = await db
+  .from("support_tickets")
+  .update({
+    status: newStatus
+  })
+  .eq("ticket_id", ticket.ticket_id);
+
+  if (updateError) {
+    console.error("Update failed:", updateError);
+    alert("Failed to update status. Check the console for error details.");
+  } else {
+    alert("Status updated successfully.");
+    location.reload();
+  }
+});
+
+
+
     });
 
 

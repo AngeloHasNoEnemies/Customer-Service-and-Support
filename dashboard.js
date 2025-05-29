@@ -6,11 +6,6 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 // ✅ Fix: use `window.supabase` from the loaded script
 const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Helper to map priority
-function mapPriority(priority) {
-  const map = { 1: 'High', 2: 'Medium', 3: 'Low' };
-  return map[priority] || 'Medium';
-}
 
 // Helper to capitalize status
 function mapStatus(status) {
@@ -64,8 +59,8 @@ async function loadDashboard() {
       <td>${ticket.ticket_id || 'N/A'}</td>
       <td>${ticket.customer_id || 'Unknown'}</td>
       <td>${ticket.issue || 'N/A'}</td>
-      <td>${mapPriority(ticket.priority || 2)}</td>
-      <td>${mapStatus(ticket.status || 'Open')}</td>
+      <td>${ticket.priority || 'N/A' }</td>
+      <td>${ticket.status || 'N/A'}</td>
       <td>${ticket.created_at || 'N/A'}</td>
       <td>${ticket.assigned_to || 'Unassigned'}</td>
       <td><a href="view_tickets.html?ticket_id=${ticket.ticket_id}">View</a></td>
