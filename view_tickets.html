@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tickets View</title>
   <link rel="stylesheet" href="style/view.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
   <nav class="navbar">
@@ -26,24 +27,21 @@
 
 
   <main>
-    <div class ="container">
-      <div class="ticket-card">
+    <div class="container">
+      <div class="ticket-card" id="ticketCard">
         <div class="ticket-header">
-          <h2>Ticket #12345</h2>
-          <span class="status-badge open">Open</span>
+          <h2 id="ticketNumber">Ticket #</h2>
+          <span class="status-badge" id="statusBadge">Loading...</span>
         </div>
 
-        <div class="ticket-section">
+        <div class="ticket-section" id="customerDetails">
           <h3>Customer Details</h3>
-          <p><strong>Name:</strong> Jane Doe</p>
-          <p><strong>Email:</strong> jane@example.com</p>
-          <p><strong>Phone:</strong> 09998887777</p>
+          <p>Loading...</p>
         </div>
 
-        <div class="ticket-section">
+        <div class="ticket-section" id="issueDetails">
           <h3>Issue</h3>
-          <p><strong>Type:</strong> Return Request</p>
-          <p><strong>Description:</strong> The product arrived damaged and needs to be returned or replaced.</p>
+          <p>Loading...</p>
         </div>
 
         <div class="ticket-section">
@@ -51,23 +49,21 @@
           <label for="status-select"><strong>Status:</strong></label>
           <div class="status-actions">
             <select id="status-select" class="status-dropdown">
-              <option value="open" selected>Open</option>
+              <option value="open">Open</option>
               <option value="in-progress">In Progress</option>
               <option value="closed">Closed</option>
             </select>
-            <button class="save-button">Save</button>
+            <button class="save-button" id="saveButton">Save</button>
           </div>
-          <p><strong>Assigned Agent:</strong> John Doe</p>
-          <p><strong>Last Updated:</strong> May 25, 2025</p>
+          <p><strong>Assigned Agent:</strong> <span id="assignedAgent">Loading...</span></p>
+          <p><strong>Last Updated:</strong> <span id="lastUpdated">Loading...</span></p>
         </div>
 
-        <!-- Back Button -->
         <div class="button-row">
           <a href="dashboard.html" class="back-button">← Back</a>
         </div>
       </div>
     </div>
-
   </main>
 
   <!-- Chat Toggle Button -->
@@ -98,6 +94,83 @@
 </div>
 
 <script>
+
+  const SUPABASE_URL = 'https://iradphcrwwokdrnhxpnd.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlyYWRwaGNyd3dva2Rybmh4cG5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY3MTI5ODEsImV4cCI6MjA2MjI4ODk4MX0.X1okOgCMPHNh_vufxDnSlENTO99tMDjkSOXMeWawNrU'; 
+  const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+
+  const urlParams = new URLSearchParams(window.location.search);
+    const ticketId = parseInt(urlParams.get("ticket_id"));
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      if (!ticketId) {
+        alert("Ticket ID not found.");
+        return;
+      }
+
+      const { data: ticket, error } = await db
+        .from("support_tickets")
+        .select("*")
+        .eq("ticket_id", ticketId)
+        .single();
+
+      if (error || !ticket) {
+        alert("Ticket not found.");
+        return;
+      }
+
+      document.getElementById("ticketNumber").textContent = `Ticket #${ticket.ticket_id}`;
+      document.getElementById("statusBadge").textContent = ticket.status;
+      document.getElementById("statusBadge").className = `status-badge ${ticket.status.replace(" ", "-").toLowerCase()}`;
+      document.getElementById("status-select").value = ticket.status;
+
+      document.getElementById("assignedAgent").textContent = ticket.assigned_agent || "Unassigned";
+      document.getElementById("lastUpdated").textContent = new Date(ticket.updated_at).toLocaleDateString();
+
+      document.getElementById("issueDetails").innerHTML = `
+        <h3>Issue</h3>
+        <p><strong>Type:</strong> ${ticket.issue}</p>
+        <p><strong>Description:</strong> ${ticket.description}</p>
+      `;
+
+      const { data: customer, error: custError } = await db
+        .from("customers")
+        .select("name, email, phone")
+        .eq("customer_id", ticket.customer_id)
+        .single();
+
+      if (!custError && customer) {
+        document.getElementById("customerDetails").innerHTML = `
+          <h3>Customer Details</h3>
+          <p><strong>Name:</strong> ${customer.name}</p>
+          <p><strong>Email:</strong> ${customer.email}</p>
+          <p><strong>Phone:</strong> ${customer.phone}</p>
+        `;
+      }
+
+      document.getElementById("saveButton").addEventListener("click", async () => {
+        const newStatus = document.getElementById("status-select").value;
+
+        const { error: updateError } = await db
+          .from("support_tickets")
+          .update({
+            status: newStatus,
+            updated_at: new Date().toISOString()
+          })
+          .eq("ticket_id", ticket.ticket_id);
+
+        if (updateError) {
+          alert("Failed to update status.");
+        } else {
+          alert("Status updated successfully.");
+          location.reload(); // refresh page to reflect update
+        }
+      });
+    });
+
+
+
   document.addEventListener("DOMContentLoaded", () => {
     const toggle = document.getElementById("chat-toggle");
     const chatbox = document.getElementById("chatbox");

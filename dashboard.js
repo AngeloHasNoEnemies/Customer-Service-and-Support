@@ -68,7 +68,7 @@ async function loadDashboard() {
       <td>${mapStatus(ticket.status || 'Open')}</td>
       <td>${ticket.created_at || 'N/A'}</td>
       <td>${ticket.assigned_to || 'Unassigned'}</td>
-      <td><a href="view_tickets.html?id=${ticket.ticket_id}">View</a></td>
+      <td><a href="view_tickets.html?ticket_id=${ticket.ticket_id}">View</a></td>
     `;
     tbody.appendChild(tr);
   });
