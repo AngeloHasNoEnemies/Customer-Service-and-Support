@@ -17,7 +17,7 @@ async function loadDashboard() {
   const { data: tickets, error } = await client
     .from('support_tickets')
     .select('*')
-    .order('created_at', { ascending: false });
+    .order('ticket_id', { ascending: false });
 
   if (error) {
     console.error('Error fetching support_tickets:', error);
