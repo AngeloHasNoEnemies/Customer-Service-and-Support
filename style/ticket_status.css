@@ -299,3 +299,84 @@ body {
   font-size: 16px;
   cursor: pointer;
 }
+
+
+/* Small tablets and phones */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem 1rem;
+  }
+
+  .navbar-title {
+    margin-bottom: 1rem;
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 0;
+    gap: 1rem;
+  }
+
+  .navbar-right {
+    margin-top: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .main {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .form-box,
+  .status-box {
+    width: 100%;
+  }
+
+  .chatbox {
+    width: 95%;
+    right: 2.5%;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 480px) {
+  .navbar-title {
+    font-size: 1.2rem;
+  }
+
+  .footer h2 {
+    font-size: 1.2rem;
+  }
+
+  .chat-toggle {
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    line-height: 50px;
+  }
+
+  .chatbox-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chatbox-input input {
+    font-size: 12px;
+  }
+
+  .chatbox-input button {
+    font-size: 14px;
+  }
+}
