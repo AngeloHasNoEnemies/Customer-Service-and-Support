@@ -6,23 +6,19 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  padding: 1rem; /* Add padding so container doesn't stick to edges */
 }
 
 .auth-container {
   background: #fff;
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: 30px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 320px; /* max width */
+  width: 320px;
   text-align: center;
-  box-sizing: border-box;
 }
 
 .auth-container h2 {
   margin-bottom: 1rem;
-  font-size: clamp(1.25rem, 2vw + 1rem, 1.5rem);
 }
 
 .auth-container form {
@@ -35,9 +31,6 @@ body {
   padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  font-size: clamp(0.9rem, 1vw + 0.75rem, 1rem);
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .auth-container button {
@@ -48,10 +41,6 @@ body {
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
-  font-size: clamp(1rem, 1vw + 0.5rem, 1.1rem);
-  width: 100%;
-  box-sizing: border-box;
-  transition: background-color 0.3s ease;
 }
 
 .auth-container button:hover {
@@ -61,9 +50,6 @@ body {
 .auth-container a {
   color: #08024e;
   text-decoration: none;
-  font-size: clamp(0.9rem, 1vw + 0.75rem, 1rem);
-  display: inline-block;
-  margin-top: 0.5rem;
 }
 
 /* Optional: on very small screens, reduce padding */
