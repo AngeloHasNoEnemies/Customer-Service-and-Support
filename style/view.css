@@ -151,7 +151,7 @@ main {
   background-color: #28a745;
 }
 
-.status-dropdown option[value="In-Progress"] {
+.status-dropdown option[value="In Progress"] {
   background-color: #2196f3;
 }
 
