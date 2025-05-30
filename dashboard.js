@@ -16,8 +16,9 @@ function mapStatus(status) {
 async function loadDashboard() {
   const { data: tickets, error } = await client
     .from('support_tickets')
-    .select('*')
+    .select('*, agents:assigned_to(name)')
     .order('ticket_id', { ascending: false });
+
 
   if (error) {
     console.error('Error fetching support_tickets:', error);
@@ -62,7 +63,7 @@ async function loadDashboard() {
       <td>${ticket.priority || 'N/A' }</td>
       <td>${ticket.status || 'N/A'}</td>
       <td>${ticket.created_at || 'N/A'}</td>
-      <td>${ticket.assigned_to || 'Unassigned'}</td>
+      <td>${ticket.agents?.name || 'Unassigned'}</td>
       <td><a href="view_tickets.html?ticket_id=${ticket.ticket_id}">View</a></td>
     `;
     tbody.appendChild(tr);
