@@ -56,7 +56,7 @@
             <button class="save-button" id="saveButton">Save</button>
           </div>
           <p><strong>Assigned Agent:</strong> <span id="assignedAgent">Loading...</span></p>
-          <p><strong>Last Updated:</strong> <span id="lastUpdated">Loading...</span></p>
+          <p><strong>Date:</strong> <span id="date">Loading...</span></p>
         </div>
 
         <div class="button-row">
@@ -131,7 +131,7 @@
       
 
       document.getElementById("assignedAgent").textContent = ticket.assigned_agent || "Unassigned";
-      document.getElementById("lastUpdated").textContent = new Date(ticket.updated_at).toLocaleDateString();
+      document.getElementById("date").textContent = new Date(ticket.created_at).toLocaleDateString();
 
       document.getElementById("issueDetails").innerHTML = `
         <h3>Issue</h3>
@@ -155,34 +155,34 @@
       }
 
     document.getElementById("saveButton").addEventListener("click", async () => {
-  const newStatus = document.getElementById("status-select").value;
+      const newStatus = document.getElementById("status-select").value;
 
-  console.log("Trying to update ticket:", ticket.ticket_id);
-  console.log("New status:", newStatus);
+      console.log("Trying to update ticket:", ticket.ticket_id);
+      console.log("New status:", newStatus);
 
-  if (!ticket || typeof ticket.ticket_id !== "number") {
-    alert("Invalid ticket ID.");
-    return;
-  }
+      if (!ticket || typeof ticket.ticket_id !== "number") {
+        alert("Invalid ticket ID.");
+        return;
+      }
 
-  // 👇 PLACE IT RIGHT HERE
-  console.log("Ticket ID being updated:", ticket?.ticket_id);
+      // 👇 PLACE IT RIGHT HERE
+      console.log("Ticket ID being updated:", ticket?.ticket_id);
 
-  const { data, error: updateError } = await db
-  .from("support_tickets")
-  .update({
-    status: newStatus
-  })
-  .eq("ticket_id", ticket.ticket_id);
+      const { data, error: updateError } = await db
+      .from("support_tickets")
+      .update({
+        status: newStatus
+      })
+      .eq("ticket_id", ticket.ticket_id);
 
-  if (updateError) {
-    console.error("Update failed:", updateError);
-    alert("Failed to update status. Check the console for error details.");
-  } else {
-    alert("Status updated successfully.");
-    location.reload();
-  }
-});
+      if (updateError) {
+        console.error("Update failed:", updateError);
+        alert("Failed to update status. Check the console for error details.");
+      } else {
+        alert("Status updated successfully.");
+        location.reload();
+      }
+    });
 
 
 
