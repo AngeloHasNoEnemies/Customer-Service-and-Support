@@ -206,11 +206,12 @@
               <td>${new Date(t.created_at).toLocaleDateString()}</td>
               <td>${t.issue}</td>
               <td><span class="status ${t.status.trim().toLowerCase().replace(/\s+/g, '-')}">${t.status}</span></td>
-              <td><a href="view_ticket.html?ticket=${t.ticket_id}">View</a></td>
+              <td><a href="customer_view_ticket.html?ticket_id=${t.ticket_id=12}">View</a></td>
             </tr>
           `).join('');
         }
       }
+
 
       function handleLogout() {
         sessionStorage.clear();
