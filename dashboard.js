@@ -76,5 +76,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
  function handleLogout() {
         sessionStorage.clear();
-        window.location.href = 'index.html';
+        window.location.href = 'admin_login.html';
       }
