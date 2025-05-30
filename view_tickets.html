@@ -137,7 +137,6 @@
   // Attach listener and set initial color
   statusDropdown.addEventListener("change", updateStatusDropdownColor);
 
-  updateStatusDropdownColor();
 
   const priorityDropdown = document.getElementById("priority-select");
 
@@ -152,12 +151,12 @@
       priorityDropdown.style.backgroundColor = "#e7a54f"; // Orange
     } else if (value === "Critical") {
       priorityDropdown.style.backgroundColor = "#dc3545"; // Orange
-    }  
+    }
+
   }
   
   priorityDropdown.addEventListener("change", updatePriorityDropdownColor)
 
-  updatePriorityDropdownColor();
 
 
   // 🔁 Fetch ticket
@@ -179,7 +178,11 @@
   document.getElementById("statusBadge").textContent = ticket.status;
   document.getElementById("statusBadge").className = `status-badge ${ticket.status.replace(" ", "-").toLowerCase()}`;
   document.getElementById("status-select").value = ticket.status;
-  updateStatusDropdownColor(); 
+  document.getElementById("priority-select").value = ticket.priority;
+  updateStatusDropdownColor();
+  updatePriorityDropdownColor();
+
+
 
   document.getElementById("assignedAgent").textContent = ticket.assigned_agent || "Unassigned";
   document.getElementById("date").textContent = new Date(ticket.created_at).toLocaleDateString();
@@ -208,23 +211,27 @@
 
   document.getElementById("saveButton").addEventListener("click", async () => {
     const newStatus = document.getElementById("status-select").value;
+    const newPriority = document.getElementById("priority-select").value;
+
     console.log("Trying to update ticket:", ticket.ticket_id);
     console.log("New status:", newStatus);
-    console.log("Ticket ID being updated:", ticket?.ticket_id);
+    console.log("New status:", newPriority);
+   
 
     const { data, error: updateError } = await db
       .from("support_tickets")
-      .update({ status: newStatus })
+      .update({ status: newStatus, priority: newPriority })
       .eq("ticket_id", ticket.ticket_id);
 
     if (updateError) {
       console.error("Update failed:", updateError);
       alert("Failed to update status. Check the console for error details.");
     } else {
-      alert("Status updated successfully.");
+      alert("Ticket updated successfully.");
       location.reload();
     }
   });
+
 
 
   const toggle = document.getElementById("chat-toggle");
