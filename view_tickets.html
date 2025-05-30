@@ -133,13 +133,31 @@
       statusDropdown.style.backgroundColor = "#dc3545"; // Red
     }
   }
-  
-  statusDropdown.addEventListener("change", updateStatusDropdownColor);
-
   updateStatusDropdownColor();
   
-
+  statusDropdown.addEventListener("change", updateStatusDropdownColor);
   
+
+  const priorityDropdown = document.getElementById("priority-select");
+
+  function updatePriorityDropdownColor() {
+    const value = priorityDropdown.value;
+
+    if (value === "Low") {
+      priorityDropdown.style.backgroundColor = "#28a745"; // Green
+    } else if (value === "Medium") {
+      priorityDropdown.style.backgroundColor = "#2196f3"; // Blue
+    } else if (value === "High") {
+      priorityDropdown.style.backgroundColor = "#e7a54f"; // Orange
+    } else if (value === "Critical") {
+      priorityDropdown.style.backgroundColor = "#dc3545"; // Red
+    }
+  }
+
+  priorityDropdown.addEventListener("change", updatePriorityDropdownColor);
+  
+  updatePriorityDropdownColor();
+
   // 🔁 Fetch ticket
   const { data, error } = await db
     .from("support_tickets")
