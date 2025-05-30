@@ -78,7 +78,22 @@
 
 
 
-  document.getElementById("assignedAgent").textContent = ticket.assigned_agent || "Unassigned";
+  if (ticket.assigned_to) {
+    const { data: agent, error: agentError } = await db
+      .from("agents")
+      .select("name")
+      .eq("agent_id", ticket.assigned_to)
+      .single();
+
+    if (!agentError && agent) {
+      document.getElementById("assignedAgent").textContent = agent.name;
+    } else {
+      document.getElementById("assignedAgent").textContent = "Unknown Agent";
+    }
+  } else {
+    document.getElementById("assignedAgent").textContent = "Unassigned";
+  }
+
   document.getElementById("date").textContent = new Date(ticket.created_at).toLocaleDateString();
 
   document.getElementById("issueDetails").innerHTML = `
