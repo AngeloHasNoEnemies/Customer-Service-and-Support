@@ -114,7 +114,7 @@
   const urlParams = new URLSearchParams(window.location.search);
     const ticketId = parseInt(urlParams.get("ticket_id"));
 
-  document.addEventListener("DOMContentLoaded", async () => {
+    document.addEventListener("DOMContentLoaded", async () => {
   if (!ticketId) {
     alert("Ticket ID not found.");
     return;
@@ -122,7 +122,7 @@
 
   const statusDropdown = document.getElementById("status-select");
 
-  function updateStatusDropdownColor() {
+  function updateDropdownColor() {
     const value = statusDropdown.value;
 
     if (value === "Open") {
@@ -133,30 +133,11 @@
       statusDropdown.style.backgroundColor = "#dc3545"; // Red
     }
   }
-  updateStatusDropdownColor();
+
+  // Attach listener and set initial color
+  statusDropdown.addEventListener("change", updateDropdownColor);
+
   
-  statusDropdown.addEventListener("change", updateStatusDropdownColor);
-  
-
-  const priorityDropdown = document.getElementById("priority-select");
-
-  function updatePriorityDropdownColor() {
-    const value = priorityDropdown.value;
-
-    if (value === "Low") {
-      priorityDropdown.style.backgroundColor = "#28a745"; // Green
-    } else if (value === "Medium") {
-      priorityDropdown.style.backgroundColor = "#2196f3"; // Blue
-    } else if (value === "High") {
-      priorityDropdown.style.backgroundColor = "#e7a54f"; // Orange
-    } else if (value === "Critical") {
-      priorityDropdown.style.backgroundColor = "#dc3545"; // Red
-    }
-  }
-
-  priorityDropdown.addEventListener("change", updatePriorityDropdownColor);
-  
-  updatePriorityDropdownColor();
 
   // 🔁 Fetch ticket
   const { data, error } = await db
