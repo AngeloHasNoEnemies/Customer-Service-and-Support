@@ -17,7 +17,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const { data, error } = await db
     .from("support_tickets")
-    .select("*")
+    .select(` *, customers:customer_id ( name, email, phone ),
+                 agents:assigned_to ( name )
+            `)
     .eq("ticket_id", ticketId)
     .single();
 
@@ -27,52 +29,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  ticket = data; // make ticket available globally
+  ticket = data;
 
   document.getElementById("ticketNumber").textContent = `Ticket #${ticket.ticket_id}`;
   document.getElementById("statusBadge").textContent = ticket.status;
   document.getElementById("statusBadge").className = `status-badge ${ticket.status.toLowerCase().replace(/\s+/g, '-')}`;
 
 
-  document.getElementById("assignedAgent").textContent = ticket.assigned_agent || "Unassigned";
+  document.getElementById("assignedAgent").textContent =
+    ticket.agents?.name || "Unassigned";
+
+  // Date
   document.getElementById("date").textContent = new Date(ticket.created_at).toLocaleDateString();
 
-  
-  document.getElementById("date").textContent = new Date(ticket.created_at).toLocaleDateString();
+ 
+  document.getElementById("customerDetails").innerHTML = `
+    <h3>Customer Details</h3>
+    <p><strong>Name:</strong> ${ticket.customers?.name || "N/A"}</p>
+    <p><strong>Email:</strong> ${ticket.customers?.email || "N/A"}</p>
+    <p><strong>Phone:</strong> ${ticket.customers?.phone || "N/A"}</p>
+  `;
 
-  if (ticket.assigned_to) {
-    const { data: agent, error: agentError } = await db
-      .from("agents")
-      .select("name")
-      .eq("agent_id", ticket.assigned_to)
-      .single();
-
-    if (!agentError && agent) {
-      document.getElementById("assignedAgent").textContent = agent.name;
-    } else {
-      document.getElementById("assignedAgent").textContent = "Unknown Agent";
-    }
-    } else {
-      document.getElementById("assignedAgent").textContent = "Unassigned";
-  }
-
-  document.getElementById("date").textContent = new Date(ticket.created_at).toLocaleDateString();
-
-
-  const { data: customer, error: custError } = await db
-    .from("customers")
-    .select("name, email, phone")
-    .eq("customer_id", ticket.customer_id)
-    .single();
-
-  if (!custError && customer) {
-    document.getElementById("customerDetails").innerHTML = `
-      <h3>Customer Details</h3>
-      <p><strong>Name:</strong> ${customer.name}</p>
-      <p><strong>Email:</strong> ${customer.email}</p>
-      <p><strong>Phone:</strong> ${customer.phone}</p>
-    `;
-  }
 
   document.getElementById("issueDetails").innerHTML = `
     <h3>Issue</h3>
@@ -80,6 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     <p><strong>Description:</strong> ${ticket.description}</p>
   `;
 
+  // Chatbox toggle (same as before)
   const toggle = document.getElementById("chat-toggle");
   const chatbox = document.getElementById("chatbox");
   const close = document.getElementById("close-chat");
@@ -91,9 +69,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   close.addEventListener("click", () => {
     chatbox.classList.add("hidden");
   });
-
-
 });
+
 
 
 function sendMessage() {
