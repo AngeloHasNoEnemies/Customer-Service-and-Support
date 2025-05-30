@@ -159,6 +159,43 @@ main {
   background-color: #dc3545;
 }
 
+.priority-dropdown {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  color: white;
+  background-color: #28a745; 
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+
+.priority-dropdown option[value="Low"] {
+  background-color: #28a745;
+}
+
+.priority-dropdown option[value="Medium"] {
+  background-color: #2196f3;
+}
+
+.priority-dropdown option[value="High"] {
+  background-color: #e7a54f;
+}
+
+.priority-dropdown option[value="Critical"] {
+  background-color: #dc3545;
+}
+
+
+
 
 .footer {
   background: #08024e;
