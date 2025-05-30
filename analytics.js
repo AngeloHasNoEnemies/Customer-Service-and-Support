@@ -40,3 +40,7 @@ async function fetchTickets() {
 
 fetchTickets()
 
+ function handleLogout() {
+        sessionStorage.clear();
+        window.location.href = 'index.html';
+      }

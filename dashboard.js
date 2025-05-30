@@ -74,3 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadDashboard();
 });
 
+ function handleLogout() {
+        sessionStorage.clear();
+        window.location.href = 'index.html';
+      }
