@@ -6,9 +6,9 @@
   let ticket; // Global ticket variable
 
   const urlParams = new URLSearchParams(window.location.search);
-    const ticketId = parseInt(urlParams.get("ticket_id"));
+  const ticketId = parseInt(urlParams.get("ticket_id"));
 
-    document.addEventListener("DOMContentLoaded", async () => {
+  document.addEventListener("DOMContentLoaded", async () => {
   if (!ticketId) {
     alert("Ticket ID not found.");
     return;
@@ -90,9 +90,10 @@
     } else {
       document.getElementById("assignedAgent").textContent = "Unknown Agent";
     }
-  } else {
-    document.getElementById("assignedAgent").textContent = "Unassigned";
+    } else {
+      document.getElementById("assignedAgent").textContent = "Unassigned";
   }
+  
 
   document.getElementById("date").textContent = new Date(ticket.created_at).toLocaleDateString();
 
@@ -116,7 +117,7 @@
       <p><strong>Phone:</strong> ${customer.phone}</p>
     `;
   }
-
+   
 
   document.getElementById("saveButton").addEventListener("click", async () => {
     const newStatus = document.getElementById("status-select").value;

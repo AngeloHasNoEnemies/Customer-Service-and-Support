@@ -22,11 +22,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     <p><strong>Description:</strong> ${ticket.description}</p>
   `;
 
-  const { data: customer, error: custError } = await db
-    .from("customers")
-    .select("name, email, phone")
-    .eq("customer_id", ticket.customer_id)
-    .single();
+  const { data: ticket, error } = await db
+  .from("support_tickets")
+  .select(`ticket_id, issue, description, status, created_at, assigned_agent, customer:customer_id(name, email)`)
+  .eq("ticket_id", ticketId)
+  .single();
 
  
 
@@ -58,34 +58,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 
-  const toggle = document.getElementById("chat-toggle");
-  const chatbox = document.getElementById("chatbox");
-  const close = document.getElementById("close-chat");
 
-  toggle.addEventListener("click", () => {
-    chatbox.classList.toggle("hidden");
-  });
-
-  close.addEventListener("click", () => {
-    chatbox.classList.add("hidden");
-  });
 });
 
-
-function sendMessage() {
-  const input = document.getElementById("chat-input");
-  const msg = input.value.trim();
-  const chat = document.getElementById("chat-messages");
-
-  if (msg !== "") {
-    const div = document.createElement("div");
-    div.className = "message user";
-    div.textContent = msg;
-    chat.appendChild(div);
-    input.value = "";
-    chat.scrollTop = chat.scrollHeight;
-  }
-}
 
 function handleLogout() {
         sessionStorage.clear();
